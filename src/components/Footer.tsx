@@ -14,8 +14,12 @@ export const Footer: React.FC = () => {
           {/* Brand info */}
           <div className="md:col-span-5 flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-display font-bold text-white text-lg shadow-lg shadow-cyan-500/20">
-                MA
+              <div className="w-11 h-11 rounded-full border border-cyan-400/40 overflow-hidden shadow-lg shadow-cyan-500/20 shrink-0">
+                <img
+                  src={personalInfo.avatar}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div>
                 <span className="font-display font-bold text-xl tracking-tight text-white block">

@@ -68,17 +68,17 @@ export const Navbar: React.FC = () => {
             href="#"
             className="group flex items-center gap-3 text-white transition-opacity hover:opacity-90"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-display font-bold text-white text-base shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              MA
+            <div className="w-10 h-10 rounded-full border border-cyan-400/40 overflow-hidden shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
+              <img
+                src={personalInfo.avatar}
+                alt={personalInfo.name}
+                className="w-full h-full object-cover object-top"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-display font-bold text-lg tracking-tight text-white flex items-center gap-2">
                 {personalInfo.name}
               </span>
-              <div className="flex items-center gap-1.5 text-[11px] font-mono text-cyan-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Available for hire</span>
-              </div>
             </div>
           </a>
 
