@@ -63,15 +63,18 @@ export const Footer: React.FC = () => {
               <a href="#education" className="hover:text-cyan-400 transition-colors">
                 // 06. Education
               </a>
+              <a href="#resume" className="hover:text-cyan-400 transition-colors">
+                // 07. Resume
+              </a>
               <a href="#contact" className="hover:text-cyan-400 transition-colors">
-                // 07. Contact
+                // 08. Contact
               </a>
               <a
                 href="/assets/resume.pdf"
                 download="Muhammad_Abdullah_Resume.pdf"
                 className="hover:text-cyan-400 transition-colors flex items-center gap-1"
               >
-                // 08. Resume PDF
+                // 09. Download PDF
               </a>
             </div>
           </div>

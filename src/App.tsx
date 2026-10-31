@@ -8,6 +8,7 @@ import { Journey } from "./components/Journey";
 import { Projects } from "./components/Projects";
 import { Services } from "./components/Services";
 import { Education } from "./components/Education";
+import { Resume } from "./components/Resume";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
@@ -30,6 +31,7 @@ export function App() {
         <Projects />
         <Services />
         <Education />
+        <Resume />
         <Contact />
       </main>
 
