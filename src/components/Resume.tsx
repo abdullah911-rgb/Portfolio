@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  FileText,
   Download,
   Eye,
   ExternalLink,
@@ -116,8 +115,12 @@ export const Resume: React.FC = () => {
               >
                 {/* Document Header Strip */}
                 <div className="bg-gradient-to-r from-cyan-500/20 via-blue-600/20 to-violet-600/20 border-b border-white/10 px-8 py-6 flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 flex-shrink-0">
-                    <FileText className="w-7 h-7 text-white" />
+                  <div className="w-14 h-14 rounded-xl border border-cyan-400/40 overflow-hidden shadow-lg shadow-cyan-500/30 flex-shrink-0">
+                    <img
+                      src={personalInfo.avatar}
+                      alt={personalInfo.name}
+                      className="w-full h-full object-cover object-top"
+                    />
                   </div>
                   <div>
                     <h3 className="font-display font-bold text-xl text-white">

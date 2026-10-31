@@ -10,6 +10,7 @@ export interface PersonalInfo {
   whatsappUrl: string;
   github: string;
   linkedin: string;
+  avatar: string;
   availableForHire: boolean;
   degree: string;
   university: string;
@@ -21,6 +22,7 @@ export const personalInfo: PersonalInfo = {
   role: "Full-Stack Developer | Python & AI/ML Developer | E-commerce Operations | Truck Dispatching",
   subtitle: "Full-Stack Developer | Python & AI/ML Developer | E-commerce Operations | Truck Dispatching",
   bio: "Computer Science graduate and versatile technology professional specializing in building responsive, scalable web applications, RESTful APIs, intelligent AI/ML software solutions, and cross-functional digital operations.",
+  avatar: "/assets/profile.jpg",
   fullBio: [
     "I am a Computer Science graduate and versatile technology professional with experience in full-stack web development, Python development, AI-powered applications, mobile app development, e-commerce operations, and truck dispatching.",
     "I specialize in building responsive, scalable web applications, RESTful APIs, and intelligent software solutions using modern technologies such as React.js, Next.js, Node.js, Express.js, Python, FastAPI, Flutter, and machine learning models.",

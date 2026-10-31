@@ -70,12 +70,24 @@ export const About: React.FC = () => {
           {/* Scroll Text Reveal Section */}
           <div className="lg:col-span-7 flex flex-col gap-8">
             <div className="p-8 sm:p-10 rounded-3xl glass-card border border-white/10 shadow-2xl relative">
-              <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
-                <span className="font-mono text-xs uppercase tracking-wider text-cyan-400 flex items-center gap-2">
-                  <Terminal className="w-4 h-4" />
-                  professional_summary.md
-                </span>
-                <span className="text-xs font-mono text-text-muted">
+              <div className="flex flex-wrap items-center justify-between pb-6 border-b border-white/10 mb-8 gap-4">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={personalInfo.avatar}
+                    alt={personalInfo.name}
+                    className="w-10 h-10 rounded-full object-cover object-top ring-2 ring-cyan-400/40 shadow-md shadow-cyan-500/20"
+                  />
+                  <div>
+                    <span className="font-mono text-xs uppercase tracking-wider text-cyan-400 flex items-center gap-1.5 font-bold">
+                      <Terminal className="w-3.5 h-3.5" />
+                      {personalInfo.name}
+                    </span>
+                    <span className="text-[11px] font-mono text-text-muted block">
+                      Full-Stack & AI Engineer
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-text-muted bg-white/[0.03] px-3 py-1 rounded-full border border-white/5">
                   University of Education, Lahore
                 </span>
               </div>

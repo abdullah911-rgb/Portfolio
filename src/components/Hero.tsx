@@ -7,7 +7,6 @@ import {
   Linkedin,
   Mail,
   Terminal,
-  Code2,
   Sparkles,
   Layers,
   Database,
@@ -182,13 +181,13 @@ export const Hero: React.FC = () => {
 
                 {/* Developer Persona Preview / Avatar Slot */}
                 <div className="flex items-center gap-4 mb-5 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                  <div className="relative w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/30 via-blue-600/20 to-purple-500/30 border border-cyan-400/30 flex items-center justify-center shrink-0 overflow-hidden">
-                    {/* Abstract avatar / photo placeholder */}
-                    <Code2 className="w-8 h-8 text-cyan-300" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <span className="absolute bottom-1 text-[9px] font-mono text-cyan-300 font-bold">
-                      DEV
-                    </span>
+                  <div className="relative w-16 h-16 rounded-xl border border-cyan-400/40 shrink-0 overflow-hidden shadow-lg shadow-cyan-500/20">
+                    <img
+                      src={personalInfo.avatar}
+                      alt={personalInfo.name}
+                      className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-xl" />
                   </div>
                   <div className="flex flex-col min-w-0">
                     <h3 className="font-display font-bold text-white text-base truncate">
