@@ -1,193 +1,201 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import React, { useEffect, useRef } from "react";
 
-interface Particle {
+interface TrailPoint {
   x: number;
   y: number;
-  vx: number;
-  vy: number;
-  radius: number;
-  color: string;
-  glow: string;
   alpha: number;
-  decay: number;
 }
 
 export const MouseSpotlight: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const particlesRef = useRef<Particle[]>([]);
-  const lastMousePos = useRef<{ x: number; y: number } | null>(null);
-
-  // White ball (main follower) with spring physics
-  const whiteX = useSpring(-100, { stiffness: 450, damping: 28, mass: 0.1 });
-  const whiteY = useSpring(-100, { stiffness: 450, damping: 28, mass: 0.1 });
-
-  // Neon green ball (trailing fluidly behind) with softer spring physics
-  const greenX = useSpring(-100, { stiffness: 220, damping: 20, mass: 0.25 });
-  const greenY = useSpring(-100, { stiffness: 220, damping: 20, mass: 0.25 });
 
   useEffect(() => {
-    setMounted(true);
+    // Only run on devices with a fine pointer (mouse/trackpad, not touch)
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
 
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     };
-    handleResize();
     window.addEventListener("resize", handleResize);
 
-    // Canvas animation loop to render fading particles
-    let animationFrameId: number;
-    const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Target positions (instant mouse coordinates)
+    let mouseX = -100;
+    let mouseY = -100;
+    let isVisible = false;
 
-      const particles = particlesRef.current;
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.alpha -= p.decay;
+    // Smooth interpolated positions
+    let whiteX = -100;
+    let whiteY = -100;
+    let greenX = -100;
+    let greenY = -100;
 
-        if (p.alpha <= 0) {
-          particles.splice(i, 1);
-          continue;
-        }
-
-        ctx.save();
-        ctx.globalAlpha = Math.max(0, p.alpha);
-        ctx.shadowColor = p.glow;
-        ctx.shadowBlur = 12;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, Math.max(0.5, p.radius * p.alpha), 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-    render();
+    // Fading trace points
+    const whiteTrails: TrailPoint[] = [];
+    const greenTrails: TrailPoint[] = [];
 
     const handleMouseMove = (e: MouseEvent) => {
-      whiteX.set(e.clientX);
-      whiteY.set(e.clientY);
-
-      greenX.set(e.clientX);
-      greenY.set(e.clientY);
-
-      if (!isVisible) setIsVisible(true);
-
-      // Calculate movement delta to spawn dynamic fading trail particles
-      const last = lastMousePos.current;
-      const dx = last ? e.clientX - last.x : 0;
-      const dy = last ? e.clientY - last.y : 0;
-      const dist = Math.hypot(dx, dy);
-
-      // Only spawn particles if mouse moved sufficiently
-      if (dist > 3) {
-        // Spawn White trace particle
-        particlesRef.current.push({
-          x: e.clientX + (Math.random() - 0.5) * 6,
-          y: e.clientY + (Math.random() - 0.5) * 6,
-          vx: -dx * 0.08 + (Math.random() - 0.5) * 0.8,
-          vy: -dy * 0.08 + (Math.random() - 0.5) * 0.8,
-          radius: 3.5 + Math.random() * 2,
-          color: "rgba(255, 255, 255, 0.9)",
-          glow: "rgba(255, 255, 255, 0.8)",
-          alpha: 0.8,
-          decay: 0.028, // Disappears smoothly in ~0.5s
-        });
-
-        // Spawn Neon Green trace particle
-        particlesRef.current.push({
-          x: e.clientX + (Math.random() - 0.5) * 10,
-          y: e.clientY + (Math.random() - 0.5) * 10,
-          vx: -dx * 0.12 + (Math.random() - 0.5) * 1.2,
-          vy: -dy * 0.12 + (Math.random() - 0.5) * 1.2,
-          radius: 2 + Math.random() * 2,
-          color: "rgba(16, 185, 129, 0.95)",
-          glow: "rgba(16, 185, 129, 0.9)",
-          alpha: 0.9,
-          decay: 0.024, // Disappears smoothly in ~0.6s
-        });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isVisible) {
+        isVisible = true;
+        whiteX = mouseX;
+        whiteY = mouseY;
+        greenX = mouseX;
+        greenY = mouseY;
       }
-
-      lastMousePos.current = { x: e.clientX, y: e.clientY };
     };
 
     const handleMouseLeave = () => {
-      setIsVisible(false);
-      lastMousePos.current = null;
+      isVisible = false;
     };
 
     const handleMouseEnter = () => {
-      setIsVisible(true);
+      isVisible = true;
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
+    let animationId: number;
+
+    const loop = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      if (isVisible) {
+        // Interpolate main white ball (fast, responsive follow)
+        whiteX += (mouseX - whiteX) * 0.28;
+        whiteY += (mouseY - whiteY) * 0.28;
+
+        // Interpolate neon green ball (trails fluidly behind with a slight delay)
+        greenX += (mouseX - greenX) * 0.14;
+        greenY += (mouseY - greenY) * 0.14;
+
+        // Push history trail points when moving
+        whiteTrails.unshift({ x: whiteX, y: whiteY, alpha: 0.85 });
+        greenTrails.unshift({ x: greenX, y: greenY, alpha: 0.95 });
+      }
+
+      // ── 1. Draw Ambient Cursor Spotlight Radial Glow ──
+      if (isVisible) {
+        const glow = ctx.createRadialGradient(greenX, greenY, 0, greenX, greenY, 320);
+        glow.addColorStop(0, "rgba(16, 185, 129, 0.14)");
+        glow.addColorStop(0.4, "rgba(0, 240, 255, 0.05)");
+        glow.addColorStop(1, "transparent");
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(greenX, greenY, 320, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // ── 2. Draw White Ball Disappearing Traces ──
+      for (let i = whiteTrails.length - 1; i >= 0; i--) {
+        const t = whiteTrails[i];
+        t.alpha -= 0.045; // Smooth decay
+        if (t.alpha <= 0) {
+          whiteTrails.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = t.alpha;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = "#FFFFFF";
+        ctx.beginPath();
+        const r = Math.max(0.5, 4.5 * t.alpha);
+        ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // ── 3. Draw Neon Green Ball Disappearing Traces ──
+      for (let i = greenTrails.length - 1; i >= 0; i--) {
+        const t = greenTrails[i];
+        t.alpha -= 0.035; // Slightly longer trailing decay
+        if (t.alpha <= 0) {
+          greenTrails.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = t.alpha;
+        ctx.shadowColor = "#10B981";
+        ctx.shadowBlur = 16;
+        ctx.fillStyle = "#10B981";
+        ctx.beginPath();
+        const r = Math.max(0.5, 3.5 * t.alpha);
+        ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // ── 4. Draw Main White Ball ──
+      if (isVisible) {
+        ctx.save();
+        // White ball outer ring & bright core
+        ctx.shadowColor = "rgba(255, 255, 255, 1)";
+        ctx.shadowBlur = 20;
+        ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
+        ctx.beginPath();
+        ctx.arc(whiteX, whiteY, 7.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(whiteX, whiteY, 14, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // ── 5. Draw Trailing Neon Green Ball ──
+      if (isVisible) {
+        ctx.save();
+        ctx.shadowColor = "#10B981";
+        ctx.shadowBlur = 24;
+        ctx.fillStyle = "#10B981";
+        ctx.beginPath();
+        ctx.arc(greenX, greenY, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Extra inner highlight
+        ctx.fillStyle = "#6EE7B7";
+        ctx.beginPath();
+        ctx.arc(greenX, greenY, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      animationId = requestAnimationFrame(loop);
+    };
+
+    animationId = requestAnimationFrame(loop);
+
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animationId);
     };
-  }, [whiteX, whiteY, greenX, greenY, isVisible]);
-
-  if (!mounted) return null;
+  }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden hidden md:block">
-      {/* ── Canvas for Smooth Vanishing Traces / Particle Trail ── */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-      />
-
-      {/* ── Outer White Ball ── */}
-      <motion.div
-        className="absolute top-0 left-0 w-8 h-8 rounded-full border-2 border-white/90 bg-white/20 backdrop-invert shadow-[0_0_20px_rgba(255,255,255,0.8)] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          x: whiteX,
-          y: whiteY,
-          opacity: isVisible ? 1 : 0,
-        }}
-        transition={{ opacity: { duration: 0.2 } }}
-      />
-
-      {/* ── Inner/Trailing Neon Green Ball with Glowing Pulse ── */}
-      <motion.div
-        className="absolute top-0 left-0 w-3 h-3 rounded-full bg-[#10B981] shadow-[0_0_15px_#10B981,0_0_30px_#10B981,0_0_45px_#059669] -translate-x-1/2 -translate-y-1/2 animate-pulse"
-        style={{
-          x: greenX,
-          y: greenY,
-          opacity: isVisible ? 1 : 0,
-        }}
-        transition={{ opacity: { duration: 0.2 } }}
-      />
-
-      {/* ── Ambient Soft Radial Glow Following Cursor ── */}
-      <motion.div
-        className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full -translate-x-1/2 -translate-y-1/2"
-        style={{
-          x: greenX,
-          y: greenY,
-          opacity: isVisible ? 0.35 : 0,
-          background:
-            "radial-gradient(circle, rgba(16,185,129,0.12) 0%, rgba(0,240,255,0.05) 35%, transparent 70%)",
-        }}
-        transition={{ opacity: { duration: 0.3 } }}
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[9999] w-full h-full"
+    />
   );
 };
