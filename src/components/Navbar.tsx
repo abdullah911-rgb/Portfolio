@@ -58,49 +58,53 @@ export const Navbar: React.FC = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "glass-nav py-3.5 shadow-2xl shadow-black/60"
+            ? "glass-nav py-3.5 shadow-2xl shadow-black/80"
             : "bg-transparent py-6"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Wordmark */}
-          <a
+          {/* Brand Wordmark with Profile Avatar */}
+          <motion.a
             href="#"
-            className="group flex items-center gap-3 text-white transition-opacity hover:opacity-90"
+            whileHover={{ scale: 1.02 }}
+            className="group flex items-center gap-3.5 text-[#E8EEF6] transition-opacity"
           >
-            <div className="w-10 h-10 rounded-full border border-cyan-400/40 overflow-hidden shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
+            <div className="relative w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-[#5E9BD9] via-[#84B6E8] to-[#E8EEF6] shadow-[0_0_20px_rgba(94,155,217,0.35)] group-hover:shadow-[0_0_30px_rgba(94,155,217,0.55)] transition-all flex-shrink-0">
               <img
                 src={personalInfo.avatar}
                 alt={personalInfo.name}
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full rounded-full object-cover object-top"
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-lg tracking-tight text-white flex items-center gap-2">
+              <span className="font-display font-bold text-lg tracking-tight text-[#E8EEF6] flex items-center gap-2 group-hover:text-[#5E9BD9] transition-colors">
                 {personalInfo.name}
               </span>
+              <span className="text-[11px] font-mono text-[#5E9BD9]/90 tracking-wider">
+                Full-Stack & AI Engineer
+              </span>
             </div>
-          </a>
+          </motion.a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/10 rounded-full px-3 py-1.5 backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-1 bg-[#181A15]/70 border border-[#5E9BD9]/20 rounded-full px-3 py-1.5 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)]">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`relative px-4 py-1.5 rounded-full text-xs font-mono tracking-wide uppercase transition-all duration-200 ${
+                  className={`relative px-4 py-1.5 rounded-full text-xs font-mono tracking-wide uppercase transition-all duration-250 ${
                     isActive
-                      ? "text-white font-medium"
-                      : "text-text-secondary hover:text-white"
+                      ? "text-[#E8EEF6] font-semibold"
+                      : "text-[#B8C4D4] hover:text-[#E8EEF6]"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 bg-white/10 rounded-full border border-white/10"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      className="absolute inset-0 bg-[#5E9BD9]/20 rounded-full border border-[#5E9BD9]/40 shadow-[0_0_15px_rgba(94,155,217,0.25)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                   <span className="relative z-10">{link.name}</span>
@@ -117,20 +121,20 @@ export const Navbar: React.FC = () => {
                 download="Muhammad_Abdullah_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider text-text-primary bg-white/[0.05] border border-white/15 hover:border-cyan-400/40 hover:bg-white/[0.08] transition-all"
+                className="btn-3d-outline inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider"
               >
-                <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                <FileText className="w-3.5 h-3.5 text-[#5E9BD9]" />
                 <span>Resume</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-text-muted" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#B8C4D4]" />
               </a>
             </MagneticButton>
 
             <MagneticButton>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-mono uppercase tracking-wider text-black font-semibold bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:opacity-95 shadow-lg shadow-cyan-500/25 transition-all"
+                className="btn-3d-blue inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-mono uppercase tracking-wider font-bold"
               >
-                <Sparkles className="w-3.5 h-3.5" />
+                <Sparkles className="w-3.5 h-3.5 text-[#121310]" />
                 <span>Let's Talk</span>
               </a>
             </MagneticButton>
@@ -139,7 +143,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-white/[0.05] border border-white/10 text-text-primary hover:text-white transition-colors"
+            className="lg:hidden p-2 rounded-xl bg-[#181A15] border border-[#5E9BD9]/20 text-[#E8EEF6] hover:text-[#5E9BD9] transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -154,7 +158,7 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/80 backdrop-blur-xl lg:hidden flex flex-col justify-between pt-28 pb-10 px-6"
+            className="fixed inset-0 z-40 bg-[#121310]/95 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-28 pb-10 px-6"
           >
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -162,7 +166,7 @@ export const Navbar: React.FC = () => {
               transition={{ delay: 0.1 }}
               className="flex flex-col gap-4"
             >
-              <p className="text-xs font-mono uppercase text-cyan-400 tracking-widest mb-2">
+              <p className="text-xs font-mono uppercase text-[#5E9BD9] tracking-widest mb-2">
                 Navigation
               </p>
               {navLinks.map((link, idx) => (
@@ -173,10 +177,10 @@ export const Navbar: React.FC = () => {
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.1 + idx * 0.05 }}
-                  className="text-2xl font-display font-bold text-white hover:text-cyan-400 transition-colors flex items-center justify-between border-b border-white/5 pb-3"
+                  className="text-2xl font-display font-bold text-[#E8EEF6] hover:text-[#5E9BD9] transition-colors flex items-center justify-between border-b border-[#5E9BD9]/10 pb-3"
                 >
                   <span>{link.name}</span>
-                  <span className="text-xs font-mono text-text-muted">0{idx + 1}</span>
+                  <span className="text-xs font-mono text-[#7E8C9F]">0{idx + 1}</span>
                 </motion.a>
               ))}
             </motion.div>
@@ -185,7 +189,7 @@ export const Navbar: React.FC = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col gap-3 pt-6 border-t border-white/10"
+              className="flex flex-col gap-3 pt-6 border-t border-[#5E9BD9]/15"
             >
               <a
                 href="/assets/resume.pdf"
@@ -193,18 +197,18 @@ export const Navbar: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-xl border border-white/15 bg-white/[0.04] text-white text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl border border-[#5E9BD9]/30 bg-[#181A15] text-[#E8EEF6] text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
               >
-                <FileText className="w-4 h-4 text-cyan-400" />
+                <FileText className="w-4 h-4 text-[#5E9BD9]" />
                 <span>Download Resume (PDF)</span>
               </a>
 
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black text-center font-mono font-semibold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25"
+                className="btn-3d-blue w-full py-3.5 rounded-xl text-center font-mono font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 text-[#121310]" />
                 <span>Let's Build Together</span>
               </a>
             </motion.div>

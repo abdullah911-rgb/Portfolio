@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
-  Phone,
   MapPin,
   Send,
   CheckCircle2,
@@ -10,7 +9,6 @@ import {
   Copy,
   ExternalLink,
   MessageSquare,
-  FileText,
   Sparkles,
 } from "lucide-react";
 import confetti from "canvas-confetti";
@@ -58,7 +56,7 @@ export const Contact: React.FC = () => {
     if (!formData.message.trim()) {
       newErrors.message = "Please include a brief message or project description.";
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message must be at least 10 characters long.";
+      newErrors.message = "Message must be at least 10 characters.";
     }
 
     setErrors(newErrors);
@@ -72,328 +70,336 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Simulate sending with realistic feedback & trigger confetti
+    // Simulate sending, trigger confetti and open mailto as fallback
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
 
+      // Trigger celebration confetti
       try {
         confetti({
           particleCount: 100,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ["#00F0FF", "#3B82F6", "#8B5CF6", "#10B981"],
+          colors: ["#5E9BD9", "#84B6E8", "#E8EEF6", "#B8C4D4"],
         });
       } catch {
-        // Safe fallback
+        // Fallback gracefully
       }
-    }, 900);
+
+      // Open mailto fallback
+      const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
+        `[Portfolio Inquiry] ${formData.subject}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+
+      window.location.href = mailtoUrl;
+
+      // Reset form after delay
+      setTimeout(() => {
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setSubmitted(false);
+      }, 5000);
+    }, 1000);
   };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  // Mailto fallback generator
-  const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
-    formData.subject || "Project Inquiry"
-  )}&body=${encodeURIComponent(
-    `Hi Muhammad,\n\nMy name is ${formData.name || "[Name]"}.\n\n${
-      formData.message || "[Message]"
-    }\n\nReach me at: ${formData.email || "[Email]"}`
-  )}`;
-
   return (
-    <section id="contact" className="py-24 md:py-36 relative overflow-hidden bg-[#0C0C0C]">
-      {/* Background ambient lighting */}
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[500px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none" />
+    <section id="contact" className="py-24 md:py-36 relative overflow-hidden bg-[#181A15]/40">
+      {/* 3D background glows */}
+      <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-[#5E9BD9]/8 blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-[#E8EEF6]/5 blur-[160px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           badge="// 07. GET IN TOUCH"
-          title="LET'S BUILD"
-          highlight="SOMETHING GREAT."
-          description="Have an opportunity, a project concept, or a development challenge in mind? Let's connect and turn it into a reality."
+          title="Let's Build Something"
+          highlight="Remarkable Together"
+          description="Whether you have an upcoming project, open role, consulting inquiry, or partnership opportunity, I'd love to connect."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Direct Contact Details & Quick Links */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Left Column: Direct Info & Social Channels */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="p-8 rounded-3xl glass-card border border-white/10">
-              <h3 className="text-xl font-display font-bold text-white mb-2">
-                Contact Information
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed mb-8">
-                I am currently open to full-time roles, freelance projects, and remote engineering opportunities. Reach out directly through any preferred channel.
-              </p>
+            {/* Quick Contact Card with 3D Depth */}
+            <div className="p-7 sm:p-9 rounded-3xl glass-card border border-[#5E9BD9]/20 shadow-3d-card flex flex-col gap-6">
+              <div className="flex items-center gap-4 pb-6 border-b border-[#5E9BD9]/15">
+                <div className="relative w-14 h-14 rounded-2xl p-[2px] bg-gradient-to-tr from-[#5E9BD9] to-[#E8EEF6] shrink-0 overflow-hidden shadow-[0_0_20px_rgba(94,155,217,0.35)]">
+                  <img
+                    src={personalInfo.avatar}
+                    alt={personalInfo.name}
+                    className="w-full h-full rounded-2xl object-cover object-top"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-display font-bold text-[#E8EEF6]">
+                    {personalInfo.name}
+                  </h3>
+                  <p className="text-xs font-mono text-[#5E9BD9]">
+                    Full-Stack & AI Systems Architect
+                  </p>
+                </div>
+              </div>
 
-              <div className="space-y-5">
-                {/* Email with copy button */}
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-between group">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="p-2.5 rounded-xl bg-cyan-400/10 text-cyan-400 shrink-0">
-                      <Mail className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[11px] font-mono text-text-muted block">Direct Email</span>
-                      <a
-                        href={`mailto:${personalInfo.email}`}
-                        className="text-sm font-mono text-white hover:text-cyan-400 transition-colors truncate block"
-                      >
-                        {personalInfo.email}
-                      </a>
-                    </div>
+              {/* Direct email with copy button */}
+              <div className="flex items-center justify-between p-4 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/20">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#5E9BD9]/10 border border-[#5E9BD9]/25 flex items-center justify-center shrink-0">
+                    <Mail className="w-4 h-4 text-[#5E9BD9]" />
                   </div>
-                  <button
-                    onClick={handleCopyEmail}
-                    className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] text-text-secondary hover:text-white transition-all shrink-0 ml-2"
-                    title="Copy Email to Clipboard"
-                    aria-label="Copy Email"
-                  >
-                    {copied ? (
-                      <span className="text-xs font-mono text-emerald-400">Copied!</span>
-                    ) : (
-                      <Copy className="w-4 h-4 text-cyan-400" />
-                    )}
-                  </button>
+                  <div className="min-w-0">
+                    <span className="text-[11px] font-mono text-[#7E8C9F] block">
+                      Direct Email
+                    </span>
+                    <a
+                      href={`mailto:${personalInfo.email}`}
+                      className="text-sm font-mono text-[#E8EEF6] hover:text-[#5E9BD9] transition-colors truncate block font-medium"
+                    >
+                      {personalInfo.email}
+                    </a>
+                  </div>
                 </div>
 
-                {/* WhatsApp & Phone */}
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-between group">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-emerald-400/10 text-emerald-400 shrink-0">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-[11px] font-mono text-text-muted block">Phone / WhatsApp</span>
-                      <a
-                        href={personalInfo.whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-mono text-white hover:text-emerald-400 transition-colors"
-                      >
-                        {personalInfo.phone}
-                      </a>
-                    </div>
-                  </div>
-                  <a
-                    href={personalInfo.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-all"
-                    title="Chat on WhatsApp"
-                  >
-                    <MessageSquare className="w-4 h-4" />
-                  </a>
-                </div>
+                <button
+                  onClick={handleCopyEmail}
+                  className="p-2 rounded-xl bg-[#0B0C0A] border border-[#5E9BD9]/20 hover:border-[#5E9BD9]/50 text-[#B8C4D4] hover:text-[#E8EEF6] transition-all ml-2 shrink-0"
+                  title="Copy email to clipboard"
+                  aria-label="Copy email"
+                >
+                  {copied ? (
+                    <CheckCircle2 className="w-4 h-4 text-[#5E9BD9]" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
 
-                {/* Location */}
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-blue-400/10 text-blue-400 shrink-0">
-                    <MapPin className="w-4 h-4" />
+              {/* WhatsApp direct CTA */}
+              <a
+                href={personalInfo.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-4 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/20 hover:border-[#5E9BD9]/50 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#5E9BD9]/10 border border-[#5E9BD9]/25 flex items-center justify-center shrink-0">
+                    <MessageSquare className="w-4 h-4 text-[#5E9BD9]" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-mono text-text-muted block">Based In</span>
-                    <span className="text-sm font-mono text-white">
-                      {personalInfo.location}
+                    <span className="text-[11px] font-mono text-[#7E8C9F] block">
+                      WhatsApp Instant Chat
+                    </span>
+                    <span className="text-sm font-mono text-[#E8EEF6] group-hover:text-[#5E9BD9] transition-colors font-medium">
+                      {personalInfo.phone}
                     </span>
                   </div>
                 </div>
-              </div>
+                <ExternalLink className="w-4 h-4 text-[#7E8C9F] group-hover:text-[#5E9BD9] transition-colors shrink-0" />
+              </a>
 
-              {/* Resume download box */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-3">
-                <span className="text-xs font-mono uppercase text-cyan-400 tracking-wider">
-                  Curriculum Vitae
-                </span>
-                <MagneticButton>
-                  <a
-                    href="/assets/resume.pdf"
-                    download="Muhammad_Abdullah_Resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white/[0.05] border border-white/15 hover:border-cyan-400/50 hover:bg-white/[0.08] text-white font-mono text-xs uppercase tracking-wider transition-all"
-                  >
-                    <FileText className="w-4 h-4 text-cyan-400" />
-                    <span>Download Official Resume (PDF)</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-text-muted" />
-                  </a>
-                </MagneticButton>
+              {/* Location indicator */}
+              <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/20">
+                <div className="w-10 h-10 rounded-xl bg-[#5E9BD9]/10 border border-[#5E9BD9]/25 flex items-center justify-center shrink-0">
+                  <MapPin className="w-4 h-4 text-[#84B6E8]" />
+                </div>
+                <div>
+                  <span className="text-[11px] font-mono text-[#7E8C9F] block">
+                    Base of Operations
+                  </span>
+                  <span className="text-sm font-mono text-[#E8EEF6] font-medium">
+                    {personalInfo.location}
+                  </span>
+                </div>
               </div>
+            </div>
+
+            {/* Quick response badge */}
+            <div className="p-5 rounded-2xl bg-[#0B0C0A]/90 border border-[#5E9BD9]/15 flex items-center gap-3 text-xs font-mono text-[#B8C4D4] shadow-inner">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#5E9BD9] animate-pulse shrink-0" />
+              <span>
+                Average response time:{" "}
+                <strong className="text-[#E8EEF6]">Under 12 hours</strong> across all business days.
+              </span>
             </div>
           </div>
 
-          {/* Right Column: Interactive Contact Form */}
+          {/* Right Column: 3D Interactive Form */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl glass-card border border-white/10 shadow-2xl relative">
-              <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
-                <h3 className="text-xl font-display font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-cyan-400" />
-                  Send a Message
-                </h3>
-                <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Typical response &lt; 12 hours
-                </span>
-              </div>
+            <div className="p-7 sm:p-10 rounded-3xl glass-card border border-[#5E9BD9]/20 shadow-3d-card relative">
+              <h3 className="text-2xl font-display font-bold text-[#E8EEF6] mb-2">
+                Send a Direct Inquiry
+              </h3>
+              <p className="text-sm text-[#B8C4D4] mb-8">
+                Fill out the project details below and I'll review and respond promptly.
+              </p>
 
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center space-y-4"
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {/* Name field */}
+                  <div>
+                    <label
+                      htmlFor="contact-name"
+                      className="block text-xs font-mono uppercase tracking-wider text-[#B8C4D4] mb-2"
+                    >
+                      Your Name <span className="text-[#5E9BD9]">*</span>
+                    </label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      placeholder="Jane Doe"
+                      className={`w-full px-4 py-3 rounded-2xl bg-[#181A15] border text-sm text-[#E8EEF6] placeholder-[#7E8C9F] font-mono focus:outline-none transition-colors ${
+                        errors.name
+                          ? "border-rose-500/70 focus:border-rose-400"
+                          : "border-[#5E9BD9]/20 focus:border-[#5E9BD9]"
+                      }`}
+                    />
+                    {errors.name && (
+                      <span className="text-[11px] font-mono text-rose-400 mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        {errors.name}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Email field */}
+                  <div>
+                    <label
+                      htmlFor="contact-email"
+                      className="block text-xs font-mono uppercase tracking-wider text-[#B8C4D4] mb-2"
+                    >
+                      Your Email <span className="text-[#5E9BD9]">*</span>
+                    </label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      placeholder="jane@company.com"
+                      className={`w-full px-4 py-3 rounded-2xl bg-[#181A15] border text-sm text-[#E8EEF6] placeholder-[#7E8C9F] font-mono focus:outline-none transition-colors ${
+                        errors.email
+                          ? "border-rose-500/70 focus:border-rose-400"
+                          : "border-[#5E9BD9]/20 focus:border-[#5E9BD9]"
+                      }`}
+                    />
+                    {errors.email && (
+                      <span className="text-[11px] font-mono text-rose-400 mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        {errors.email}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Subject field */}
+                <div>
+                  <label
+                    htmlFor="contact-subject"
+                    className="block text-xs font-mono uppercase tracking-wider text-[#B8C4D4] mb-2"
                   >
-                    <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
-                      <CheckCircle2 className="w-7 h-7" />
-                    </div>
-                    <h4 className="text-2xl font-display font-bold text-white">
-                      Message Received!
-                    </h4>
-                    <p className="text-sm text-text-secondary max-w-md mx-auto leading-relaxed">
-                      Thank you for reaching out, <span className="text-white font-medium">{formData.name}</span>. I have logged your message and will reply to <span className="text-cyan-400">{formData.email}</span> shortly.
-                    </p>
-                    <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
-                      <a
-                        href={mailtoUrl}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.06] border border-white/15 text-xs font-mono uppercase text-white hover:bg-white/[0.1] transition-all"
-                      >
-                        <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Send copy via Email Client</span>
-                      </a>
-                      <button
-                        onClick={() => {
-                          setSubmitted(false);
-                          setFormData({ name: "", email: "", subject: "", message: "" });
-                        }}
-                        className="px-5 py-2.5 rounded-full bg-cyan-400 text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all"
-                      >
-                        Send Another Note
-                      </button>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {/* Name field */}
-                      <div>
-                        <label className="block text-xs font-mono uppercase text-text-secondary mb-2">
-                          Your Name <span className="text-cyan-400">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="e.g. Sarah Jenkins"
-                          className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-white font-mono text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all ${
-                            errors.name ? "border-rose-500/80 bg-rose-500/[0.03]" : "border-white/10 hover:border-white/20"
-                          }`}
-                        />
-                        {errors.name && (
-                          <p className="text-xs font-mono text-rose-400 mt-1.5 flex items-center gap-1">
-                            <AlertCircle className="w-3 h-3" /> {errors.name}
-                          </p>
-                        )}
-                      </div>
+                    Subject / Topic <span className="text-[#5E9BD9]">*</span>
+                  </label>
+                  <input
+                    id="contact-subject"
+                    type="text"
+                    value={formData.subject}
+                    onChange={(e) =>
+                      setFormData({ ...formData, subject: e.target.value })
+                    }
+                    placeholder="Full-Stack Application Development / AI Integration"
+                    className={`w-full px-4 py-3 rounded-2xl bg-[#181A15] border text-sm text-[#E8EEF6] placeholder-[#7E8C9F] font-mono focus:outline-none transition-colors ${
+                      errors.subject
+                        ? "border-rose-500/70 focus:border-rose-400"
+                        : "border-[#5E9BD9]/20 focus:border-[#5E9BD9]"
+                    }`}
+                  />
+                  {errors.subject && (
+                    <span className="text-[11px] font-mono text-rose-400 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {errors.subject}
+                    </span>
+                  )}
+                </div>
 
-                      {/* Email field */}
-                      <div>
-                        <label className="block text-xs font-mono uppercase text-text-secondary mb-2">
-                          Your Email <span className="text-cyan-400">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="name@company.com"
-                          className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-white font-mono text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all ${
-                            errors.email ? "border-rose-500/80 bg-rose-500/[0.03]" : "border-white/10 hover:border-white/20"
-                          }`}
-                        />
-                        {errors.email && (
-                          <p className="text-xs font-mono text-rose-400 mt-1.5 flex items-center gap-1">
-                            <AlertCircle className="w-3 h-3" /> {errors.email}
-                          </p>
-                        )}
-                      </div>
-                    </div>
+                {/* Message field */}
+                <div>
+                  <label
+                    htmlFor="contact-message"
+                    className="block text-xs font-mono uppercase tracking-wider text-[#B8C4D4] mb-2"
+                  >
+                    Project Details & Scope <span className="text-[#5E9BD9]">*</span>
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                    placeholder="Tell me about your system requirements, timeline, and goals..."
+                    className={`w-full px-4 py-3 rounded-2xl bg-[#181A15] border text-sm text-[#E8EEF6] placeholder-[#7E8C9F] font-mono focus:outline-none transition-colors resize-none ${
+                      errors.message
+                        ? "border-rose-500/70 focus:border-rose-400"
+                        : "border-[#5E9BD9]/20 focus:border-[#5E9BD9]"
+                    }`}
+                  />
+                  {errors.message && (
+                    <span className="text-[11px] font-mono text-rose-400 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {errors.message}
+                    </span>
+                  )}
+                </div>
 
-                    {/* Subject field */}
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-text-secondary mb-2">
-                        Subject / Opportunity Type <span className="text-cyan-400">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        placeholder="e.g. Full-Stack Developer Role / MVP Project"
-                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-white font-mono text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all ${
-                          errors.subject ? "border-rose-500/80 bg-rose-500/[0.03]" : "border-white/10 hover:border-white/20"
-                        }`}
-                      />
-                      {errors.subject && (
-                        <p className="text-xs font-mono text-rose-400 mt-1.5 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" /> {errors.subject}
-                        </p>
-                      )}
-                    </div>
+                {/* Submit button */}
+                <MagneticButton>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-3d-blue w-full py-4 rounded-2xl font-mono font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <span className="inline-flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-[#121310] border-t-transparent rounded-full animate-spin" />
+                        <span>Sending Transmission...</span>
+                      </span>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 text-[#121310]" />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
+                </MagneticButton>
 
-                    {/* Message field */}
-                    <div>
-                      <label className="block text-xs font-mono uppercase text-text-secondary mb-2">
-                        Message & Project Details <span className="text-cyan-400">*</span>
-                      </label>
-                      <textarea
-                        rows={5}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Tell me about your application, timeline, technology preferences, or team requirements..."
-                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-white font-mono text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all resize-none ${
-                          errors.message ? "border-rose-500/80 bg-rose-500/[0.03]" : "border-white/10 hover:border-white/20"
-                        }`}
-                      />
-                      {errors.message && (
-                        <p className="text-xs font-mono text-rose-400 mt-1.5 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" /> {errors.message}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Action button & Mailto fallback */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-black font-mono font-bold text-xs uppercase tracking-wider shadow-lg shadow-cyan-400/20 hover:shadow-cyan-400/35 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                            <span>Dispatching...</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>Send Message</span>
-                            <Send className="w-3.5 h-3.5" />
-                          </>
-                        )}
-                      </button>
-
-                      <a
-                        href={mailtoUrl}
-                        className="text-xs font-mono text-text-muted hover:text-cyan-400 transition-colors flex items-center gap-1 self-center sm:self-auto"
-                      >
-                        <span>Or click to open standard mail client</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
-                  </form>
-                )}
-              </AnimatePresence>
+                {/* Feedback message */}
+                <AnimatePresence>
+                  {submitted && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="p-4 rounded-2xl bg-[#5E9BD9]/15 border border-[#5E9BD9]/30 text-[#E8EEF6] text-xs font-mono flex items-center gap-3"
+                    >
+                      <Sparkles className="w-5 h-5 text-[#5E9BD9] shrink-0" />
+                      <span>
+                        Thank you! Your message has been prepared in your email client, and I will be in touch shortly.
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </form>
             </div>
           </div>
         </div>

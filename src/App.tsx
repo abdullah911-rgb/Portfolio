@@ -14,7 +14,7 @@ import { Footer } from "./components/Footer";
 
 export function App() {
   return (
-    <div className="min-h-screen bg-[#0C0C0C] text-[#F4F4F4] relative selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-[#121310] text-[#E8EEF6] relative selection:bg-[#5E9BD9]/30 selection:text-[#E8EEF6]">
       {/* Ambient mouse follower */}
       <MouseSpotlight />
 

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Briefcase,
   Calendar,
   MapPin,
   CheckCircle2,
-  TrendingUp,
   Laptop,
   Truck,
   ShoppingBag,
@@ -15,16 +13,16 @@ import { SectionHeading } from "./SectionHeading";
 import { experiences } from "../data/experience";
 
 const roleIcons: Record<string, React.ReactNode> = {
-  "sky-bridge": <Truck className="w-5 h-5 text-cyan-400" />,
-  "online-experts": <Laptop className="w-5 h-5 text-blue-400" />,
-  "amtex-limited": <ShoppingBag className="w-5 h-5 text-emerald-400" />,
+  "sky-bridge": <Truck className="w-5 h-5 text-[#5E9BD9]" />,
+  "online-experts": <Laptop className="w-5 h-5 text-[#84B6E8]" />,
+  "amtex-limited": <ShoppingBag className="w-5 h-5 text-[#5E9BD9]" />,
 };
 
 const journeyTabs = [
-  { id: "all", label: "Complete Journey", icon: <Compass className="w-4 h-4 text-cyan-400" /> },
-  { id: "dev", label: "Software Development", icon: <Laptop className="w-4 h-4 text-blue-400" /> },
-  { id: "ecommerce", label: "E-Commerce & Analytics", icon: <ShoppingBag className="w-4 h-4 text-emerald-400" /> },
-  { id: "logistics", label: "Logistics & Dispatch", icon: <Truck className="w-4 h-4 text-sky-400" /> },
+  { id: "all", label: "Complete Journey", icon: <Compass className="w-4 h-4 text-[#5E9BD9]" /> },
+  { id: "dev", label: "Software Development", icon: <Laptop className="w-4 h-4 text-[#84B6E8]" /> },
+  { id: "ecommerce", label: "E-Commerce & Analytics", icon: <ShoppingBag className="w-4 h-4 text-[#5E9BD9]" /> },
+  { id: "logistics", label: "Logistics & Dispatch", icon: <Truck className="w-4 h-4 text-[#84B6E8]" /> },
 ];
 
 export const Journey: React.FC = () => {
@@ -39,15 +37,15 @@ export const Journey: React.FC = () => {
   });
 
   return (
-    <section id="journey" className="py-24 md:py-36 relative overflow-hidden bg-[#0C0C0C]">
+    <section id="journey" className="py-24 md:py-36 relative overflow-hidden bg-[#121310]">
       {/* Anchor for backward compatibility with #experience */}
       <div id="experience" className="absolute -top-20" />
 
-      {/* Glow accent */}
-      <div className="absolute right-0 top-1/3 w-96 h-96 bg-blue-600/10 blur-[130px] rounded-full pointer-events-none" />
-      <div className="absolute left-10 bottom-1/4 w-80 h-80 bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none" />
+      {/* 3D Glow accents */}
+      <div className="absolute right-0 top-1/3 w-96 h-96 bg-[#5E9BD9]/10 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute left-10 bottom-1/4 w-80 h-80 bg-[#E8EEF6]/6 blur-[150px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           badge="// 03. MY JOURNEY & EXPERIENCES"
           title="Career Trajectory &"
@@ -57,155 +55,130 @@ export const Journey: React.FC = () => {
 
         {/* Journey Milestones Overview Ribbon */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <span className="text-xs font-mono text-cyan-400 block mb-1">
-              01. Academic Foundation
+          <motion.div whileHover={{ translateY: -3 }} className="p-5 rounded-2xl glass-card border border-[#5E9BD9]/20">
+            <span className="text-2xl sm:text-3xl font-display font-extrabold text-gradient-blue block mb-1">
+              3+ Roles
             </span>
-            <span className="text-white font-display font-bold text-base block">
-              BSCS Graduate
+            <span className="text-xs font-mono text-[#E8EEF6]">Industry Experience</span>
+          </motion.div>
+          <motion.div whileHover={{ translateY: -3 }} className="p-5 rounded-2xl glass-card border border-[#5E9BD9]/20">
+            <span className="text-2xl sm:text-3xl font-display font-extrabold text-gradient-blue block mb-1">
+              9+ Marketplaces
             </span>
-            <span className="text-[11px] font-mono text-text-muted">
-              Univ of Education, Lahore (22-26)
+            <span className="text-xs font-mono text-[#E8EEF6]">Global Brand Ops</span>
+          </motion.div>
+          <motion.div whileHover={{ translateY: -3 }} className="p-5 rounded-2xl glass-card border border-[#5E9BD9]/20">
+            <span className="text-2xl sm:text-3xl font-display font-extrabold text-gradient-blue block mb-1">
+              Full-Stack
             </span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <span className="text-xs font-mono text-blue-400 block mb-1">
-              02. Full-Stack Production
+            <span className="text-xs font-mono text-[#E8EEF6]">Production Systems</span>
+          </motion.div>
+          <motion.div whileHover={{ translateY: -3 }} className="p-5 rounded-2xl glass-card border border-[#5E9BD9]/20">
+            <span className="text-2xl sm:text-3xl font-display font-extrabold text-gradient-blue block mb-1">
+              Cross-Domain
             </span>
-            <span className="text-white font-display font-bold text-base block">
-              Full-Stack Developer
-            </span>
-            <span className="text-[11px] font-mono text-text-muted">
-              Online Experts (Remote)
-            </span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <span className="text-xs font-mono text-emerald-400 block mb-1">
-              03. Multi-Channel Commerce
-            </span>
-            <span className="text-white font-display font-bold text-base block">
-              E-Commerce Brand Manager
-            </span>
-            <span className="text-[11px] font-mono text-text-muted">
-              Amtex Limited (9+ Marketplaces)
-            </span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-            <span className="text-xs font-mono text-purple-400 block mb-1">
-              04. Transportation Ops
-            </span>
-            <span className="text-white font-display font-bold text-base block">
-              Truck Dispatcher
-            </span>
-            <span className="text-[11px] font-mono text-text-muted">
-              Sky Bridge Solutions
-            </span>
-          </div>
+            <span className="text-xs font-mono text-[#E8EEF6]">Engineering & Ops</span>
+          </motion.div>
         </div>
 
-        {/* Filter Navigation Tabs */}
+        {/* 3D Domain Filter Tabs */}
         <div className="flex flex-wrap items-center gap-2 mb-12">
           {journeyTabs.map((tab) => (
-            <button
+            <motion.button
               key={tab.id}
+              whileHover={{ scale: 1.03, translateY: -2 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
                 activeTab === tab.id
-                  ? "bg-cyan-400 text-black font-semibold shadow-lg shadow-cyan-400/20"
-                  : "bg-white/[0.03] text-text-secondary border border-white/10 hover:text-white hover:bg-white/[0.06]"
+                  ? "btn-3d-blue font-bold shadow-blue-button"
+                  : "bg-[#181A15] text-[#B8C4D4] border border-[#5E9BD9]/20 hover:text-[#E8EEF6] hover:border-[#5E9BD9]/40"
               }`}
             >
               <span>{tab.icon}</span>
               <span>{tab.label}</span>
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        {/* Timeline representation */}
-        <div className="relative border-l border-white/10 ml-4 md:ml-8 pl-6 md:pl-12 space-y-12">
+        {/* 3D Timeline Cards */}
+        <div className="relative pl-6 sm:pl-10 border-l border-[#5E9BD9]/25 space-y-12">
           <AnimatePresence mode="wait">
-            {filteredExperiences.map((exp, idx) => (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="relative group"
-              >
-                {/* Timeline node */}
-                <div className="absolute -left-[31px] md:-left-[55px] top-1.5 w-7 h-7 rounded-full bg-[#111318] border-2 border-cyan-400 flex items-center justify-center group-hover:scale-125 transition-transform duration-300 shadow-lg shadow-cyan-400/20">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                </div>
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+              className="space-y-12"
+            >
+              {filteredExperiences.map((exp, idx) => (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, x: 25 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  whileHover={{ translateY: -4 }}
+                  className="relative p-7 sm:p-9 rounded-3xl glass-card border border-[#5E9BD9]/20 shadow-3d-card group"
+                >
+                  {/* Floating Glowing Node Marker */}
+                  <div className="absolute -left-[35px] sm:-left-[51px] top-8 w-5 h-5 rounded-full bg-[#121310] border-2 border-[#5E9BD9] shadow-[0_0_15px_#5E9BD9] flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-[#E8EEF6] animate-pulse" />
+                  </div>
 
-                {/* Experience Card */}
-                <div className="p-7 sm:p-9 rounded-3xl glass-card border border-white/10 hover:border-cyan-400/40 transition-all duration-300">
-                  {/* Header metadata */}
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-3 mb-2">
-                        <span className="p-2 rounded-xl bg-white/[0.04] border border-white/10">
-                          {roleIcons[exp.id] || <Briefcase className="w-5 h-5 text-cyan-400" />}
-                        </span>
-                        <h3 className="text-2xl font-display font-bold text-white group-hover:text-cyan-300 transition-colors">
+                  {/* Header Row */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#5E9BD9]/15 mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 rounded-2xl bg-[#5E9BD9]/10 border border-[#5E9BD9]/25 group-hover:scale-105 group-hover:bg-[#5E9BD9]/20 transition-all shrink-0">
+                        {roleIcons[exp.id] || <Laptop className="w-5 h-5 text-[#5E9BD9]" />}
+                      </div>
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-display font-bold text-[#E8EEF6] group-hover:text-[#5E9BD9] transition-colors">
                           {exp.role}
                         </h3>
-                        <span className="px-3 py-1 rounded-full text-xs font-mono bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
-                          {exp.type}
-                        </span>
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-text-secondary font-mono">
-                        <span className="text-white font-medium">{exp.company}</span>
-                        <span className="flex items-center gap-1.5 text-text-muted">
-                          <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                          {exp.location}
-                        </span>
+                        <p className="text-sm font-mono text-[#5E9BD9] font-medium mt-0.5">
+                          {exp.company}
+                        </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/5 text-xs font-mono text-cyan-400 self-start lg:self-center">
-                      <Calendar className="w-3.5 h-3.5" />
-                      <span>{exp.period}</span>
+                    <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#B8C4D4]">
+                      <span className="flex items-center gap-1.5 bg-[#181A15] px-3 py-1.5 rounded-full border border-[#5E9BD9]/20">
+                        <Calendar className="w-3.5 h-3.5 text-[#5E9BD9]" />
+                        {exp.period}
+                      </span>
+                      <span className="flex items-center gap-1.5 bg-[#181A15] px-3 py-1.5 rounded-full border border-[#5E9BD9]/20">
+                        <MapPin className="w-3.5 h-3.5 text-[#84B6E8]" />
+                        {exp.location}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Bullets with verified details from image */}
-                  <ul className="space-y-4 mb-6">
-                    {exp.description.map((bullet, bulletIdx) => (
-                      <li key={bulletIdx} className="flex items-start gap-3 text-text-secondary text-sm md:text-base leading-relaxed">
-                        <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-1" />
-                        <span>{bullet}</span>
-                      </li>
+                  {/* Narrative Description Points */}
+                  <div className="space-y-3 mb-7">
+                    {exp.description.map((paragraph, pIdx) => (
+                      <div key={pIdx} className="flex items-start gap-3 text-xs sm:text-sm text-[#B8C4D4] leading-relaxed">
+                        <CheckCircle2 className="w-4 h-4 text-[#5E9BD9] shrink-0 mt-0.5" />
+                        <span>{paragraph}</span>
+                      </div>
                     ))}
-                  </ul>
-
-                  {/* Impact Metric & Tech Tags */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-white/5">
-                    {exp.metrics && (
-                      <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
-                        <TrendingUp className="w-4 h-4 shrink-0" />
-                        <span>{exp.metrics}</span>
-                      </div>
-                    )}
-
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/[0.03] border border-white/5 text-text-secondary hover:text-white transition-colors"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+
+                  {/* Technologies / Skills Tags */}
+                  <div className="flex flex-wrap gap-2 pt-6 border-t border-[#5E9BD9]/15">
+                    {exp.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 rounded-xl text-xs font-mono bg-[#181A15] border border-[#5E9BD9]/20 text-[#E8EEF6] hover:border-[#5E9BD9]/50 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </AnimatePresence>
         </div>
       </div>

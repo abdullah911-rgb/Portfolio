@@ -8,10 +8,10 @@ import { projects } from "../data/projects";
 import type { Project } from "../data/projects";
 
 const filterTabs = [
-  { id: "all", label: "All Projects", count: 6, icon: <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> },
-  { id: "fullstack", label: "Full-Stack Platforms", count: 3, icon: <Layers className="w-3.5 h-3.5 text-blue-400" /> },
-  { id: "ai", label: "AI & Computer Vision", count: 1, icon: <Bot className="w-3.5 h-3.5 text-emerald-400" /> },
-  { id: "interactive", label: "Productivity & Interactive", count: 2, icon: <Layout className="w-3.5 h-3.5 text-purple-400" /> },
+  { id: "all", label: "All Projects", count: 6, icon: <Sparkles className="w-3.5 h-3.5 text-[#5E9BD9]" /> },
+  { id: "fullstack", label: "Full-Stack Platforms", count: 3, icon: <Layers className="w-3.5 h-3.5 text-[#84B6E8]" /> },
+  { id: "ai", label: "AI & Computer Vision", count: 1, icon: <Bot className="w-3.5 h-3.5 text-[#5E9BD9]" /> },
+  { id: "interactive", label: "Productivity & Interactive", count: 2, icon: <Layout className="w-3.5 h-3.5 text-[#84B6E8]" /> },
 ];
 
 export const Projects: React.FC = () => {
@@ -33,11 +33,11 @@ export const Projects: React.FC = () => {
   });
 
   return (
-    <section id="projects" className="py-24 md:py-36 relative overflow-hidden bg-[#0C0C0C]">
-      {/* Background radial glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-cyan-500/5 blur-[160px] rounded-full pointer-events-none" />
+    <section id="projects" className="py-24 md:py-36 relative overflow-hidden bg-[#181A15]/40">
+      {/* 3D Dynamic Ambient Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#5E9BD9]/8 blur-[160px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           badge="// 04. FEATURED PROJECTS"
           title="Engineered For Real-World Scale &"
@@ -45,38 +45,40 @@ export const Projects: React.FC = () => {
           description="A curated catalog of 6 production-grade systems spanning AI computer vision, dual-market rental platforms, EdTech LMS, and logistics operations."
         />
 
-        {/* Filter Navigation */}
-        <div className="flex flex-wrap items-center gap-2 mb-10">
+        {/* 3D Filter Navigation Tabs */}
+        <div className="flex flex-wrap items-center gap-2 mb-12">
           {filterTabs.map((tab) => (
-            <button
+            <motion.button
               key={tab.id}
+              whileHover={{ scale: 1.03, translateY: -2 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => setSelectedFilter(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
                 selectedFilter === tab.id
-                  ? "bg-cyan-400 text-black font-semibold shadow-lg shadow-cyan-400/20"
-                  : "bg-white/[0.03] text-text-secondary border border-white/10 hover:text-white hover:bg-white/[0.06]"
+                  ? "btn-3d-blue font-bold shadow-blue-button"
+                  : "bg-[#181A15] text-[#B8C4D4] border border-[#5E9BD9]/20 hover:text-[#E8EEF6] hover:border-[#5E9BD9]/40"
               }`}
             >
               <span>{tab.icon}</span>
               <span>{tab.label}</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                selectedFilter === tab.id ? "bg-black/20 text-black" : "bg-white/10 text-text-muted"
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                selectedFilter === tab.id ? "bg-[#121310]/20 text-[#121310]" : "bg-white/10 text-[#7E8C9F]"
               }`}>
                 {tab.count}
               </span>
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        {/* Sticky Stacking Cards Container */}
+        {/* 3D Stacking Cards Container */}
         <div className="relative pt-2">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedFilter}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
             >
               {filteredProjects.map((project, index) => (
                 <ProjectCard

@@ -35,24 +35,26 @@ export const MouseSpotlight: React.FC = () => {
     let isVisible = false;
 
     // Smooth interpolated positions
-    let whiteX = -100;
-    let whiteY = -100;
-    let greenX = -100;
-    let greenY = -100;
+    // Bright Gray (#E8EEF6) main ball
+    let brightX = -100;
+    let brightY = -100;
+    // Carolina Blue (#5E9BD9) trailing ball
+    let blueX = -100;
+    let blueY = -100;
 
     // Fading trace points
-    const whiteTrails: TrailPoint[] = [];
-    const greenTrails: TrailPoint[] = [];
+    const brightTrails: TrailPoint[] = [];
+    const blueTrails: TrailPoint[] = [];
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (!isVisible) {
         isVisible = true;
-        whiteX = mouseX;
-        whiteY = mouseY;
-        greenX = mouseX;
-        greenY = mouseY;
+        brightX = mouseX;
+        brightY = mouseY;
+        blueX = mouseX;
+        blueY = mouseY;
       }
     };
 
@@ -74,45 +76,46 @@ export const MouseSpotlight: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
 
       if (isVisible) {
-        // Interpolate main white ball (fast, responsive follow)
-        whiteX += (mouseX - whiteX) * 0.28;
-        whiteY += (mouseY - whiteY) * 0.28;
+        // Interpolate main Bright Gray ball (fast, responsive follow)
+        brightX += (mouseX - brightX) * 0.28;
+        brightY += (mouseY - brightY) * 0.28;
 
-        // Interpolate neon green ball (trails fluidly behind with a slight delay)
-        greenX += (mouseX - greenX) * 0.14;
-        greenY += (mouseY - greenY) * 0.14;
+        // Interpolate Carolina Blue ball (trails fluidly behind with soft damping)
+        blueX += (mouseX - blueX) * 0.14;
+        blueY += (mouseY - blueY) * 0.14;
 
         // Push history trail points when moving
-        whiteTrails.unshift({ x: whiteX, y: whiteY, alpha: 0.85 });
-        greenTrails.unshift({ x: greenX, y: greenY, alpha: 0.95 });
+        brightTrails.unshift({ x: brightX, y: brightY, alpha: 0.85 });
+        blueTrails.unshift({ x: blueX, y: blueY, alpha: 0.95 });
       }
 
-      // ── 1. Draw Ambient Cursor Spotlight Radial Glow ──
+      // ── 1. Draw 3D Ambient Cursor Spotlight (Carolina Blue #5E9BD9) ──
       if (isVisible) {
-        const glow = ctx.createRadialGradient(greenX, greenY, 0, greenX, greenY, 320);
-        glow.addColorStop(0, "rgba(16, 185, 129, 0.14)");
-        glow.addColorStop(0.4, "rgba(0, 240, 255, 0.05)");
+        const glow = ctx.createRadialGradient(blueX, blueY, 0, blueX, blueY, 340);
+        glow.addColorStop(0, "rgba(94, 155, 217, 0.18)");
+        glow.addColorStop(0.35, "rgba(94, 155, 217, 0.06)");
+        glow.addColorStop(0.7, "rgba(232, 238, 246, 0.02)");
         glow.addColorStop(1, "transparent");
         ctx.fillStyle = glow;
         ctx.beginPath();
-        ctx.arc(greenX, greenY, 320, 0, Math.PI * 2);
+        ctx.arc(blueX, blueY, 340, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // ── 2. Draw White Ball Disappearing Traces ──
-      for (let i = whiteTrails.length - 1; i >= 0; i--) {
-        const t = whiteTrails[i];
+      // ── 2. Draw Bright Gray (#E8EEF6) Ball Disappearing Traces ──
+      for (let i = brightTrails.length - 1; i >= 0; i--) {
+        const t = brightTrails[i];
         t.alpha -= 0.045; // Smooth decay
         if (t.alpha <= 0) {
-          whiteTrails.splice(i, 1);
+          brightTrails.splice(i, 1);
           continue;
         }
 
         ctx.save();
         ctx.globalAlpha = t.alpha;
-        ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
-        ctx.shadowBlur = 10;
-        ctx.fillStyle = "#FFFFFF";
+        ctx.shadowColor = "rgba(232, 238, 246, 0.9)";
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = "#E8EEF6";
         ctx.beginPath();
         const r = Math.max(0.5, 4.5 * t.alpha);
         ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
@@ -120,60 +123,61 @@ export const MouseSpotlight: React.FC = () => {
         ctx.restore();
       }
 
-      // ── 3. Draw Neon Green Ball Disappearing Traces ──
-      for (let i = greenTrails.length - 1; i >= 0; i--) {
-        const t = greenTrails[i];
+      // ── 3. Draw Carolina Blue (#5E9BD9) Ball Disappearing Traces ──
+      for (let i = blueTrails.length - 1; i >= 0; i--) {
+        const t = blueTrails[i];
         t.alpha -= 0.035; // Slightly longer trailing decay
         if (t.alpha <= 0) {
-          greenTrails.splice(i, 1);
+          blueTrails.splice(i, 1);
           continue;
         }
 
         ctx.save();
         ctx.globalAlpha = t.alpha;
-        ctx.shadowColor = "#10B981";
-        ctx.shadowBlur = 16;
-        ctx.fillStyle = "#10B981";
+        ctx.shadowColor = "#5E9BD9";
+        ctx.shadowBlur = 18;
+        ctx.fillStyle = "#5E9BD9";
         ctx.beginPath();
-        const r = Math.max(0.5, 3.5 * t.alpha);
+        const r = Math.max(0.5, 3.8 * t.alpha);
         ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
 
-      // ── 4. Draw Main White Ball ──
+      // ── 4. Draw Main Bright Gray Ball with Outer Pulse Ring ──
       if (isVisible) {
         ctx.save();
-        // White ball outer ring & bright core
-        ctx.shadowColor = "rgba(255, 255, 255, 1)";
-        ctx.shadowBlur = 20;
-        ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
+        // Inner luminous core
+        ctx.shadowColor = "rgba(232, 238, 246, 1)";
+        ctx.shadowBlur = 22;
+        ctx.fillStyle = "#E8EEF6";
         ctx.beginPath();
-        ctx.arc(whiteX, whiteY, 7.5, 0, Math.PI * 2);
+        ctx.arc(brightX, brightY, 7.5, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+        // 3D Glassy Ring
+        ctx.strokeStyle = "rgba(232, 238, 246, 0.85)";
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.arc(whiteX, whiteY, 14, 0, Math.PI * 2);
+        ctx.arc(brightX, brightY, 14, 0, Math.PI * 2);
         ctx.stroke();
         ctx.restore();
       }
 
-      // ── 5. Draw Trailing Neon Green Ball ──
+      // ── 5. Draw Trailing Carolina Blue (#5E9BD9) Ball ──
       if (isVisible) {
         ctx.save();
-        ctx.shadowColor = "#10B981";
-        ctx.shadowBlur = 24;
-        ctx.fillStyle = "#10B981";
+        ctx.shadowColor = "#5E9BD9";
+        ctx.shadowBlur = 25;
+        ctx.fillStyle = "#5E9BD9";
         ctx.beginPath();
-        ctx.arc(greenX, greenY, 5, 0, Math.PI * 2);
+        ctx.arc(blueX, blueY, 5.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Extra inner highlight
-        ctx.fillStyle = "#6EE7B7";
+        // Inner glowing core
+        ctx.fillStyle = "#A7CEF4";
         ctx.beginPath();
-        ctx.arc(greenX, greenY, 2.5, 0, Math.PI * 2);
+        ctx.arc(blueX, blueY, 2.5, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  ExternalLink,
   Github,
   Info,
   CheckCircle2,
@@ -41,42 +40,45 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     // 01. Cookify — AI Smart Recipe & Fitness App
     if (project.id === "cookify") {
       return (
-        <div className="w-full h-full p-5 sm:p-7 rounded-2xl bg-[#090A0E] border border-white/10 flex flex-col justify-between overflow-hidden relative group">
-          <div className="flex items-center justify-between pb-4 border-b border-white/5">
+        <div className="w-full h-full p-5 sm:p-7 rounded-3xl bg-[#0B0C0A] border border-[#5E9BD9]/25 flex flex-col justify-between overflow-hidden relative group shadow-inner">
+          <div className="flex items-center justify-between pb-4 border-b border-[#5E9BD9]/15">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-xs font-mono text-emerald-400 ml-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#5E9BD9]" />
+              <span className="text-xs font-mono text-[#5E9BD9] ml-2">
                 cookify.ai.app (Flutter + FastAPI)
               </span>
             </div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#5E9BD9]/15 text-[#5E9BD9] border border-[#5E9BD9]/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#5E9BD9] animate-pulse" />
               YOLOv8 Active
             </span>
           </div>
 
           <div className="space-y-3 my-3">
             {/* Vision Scanner Simulation */}
-            <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 relative overflow-hidden">
+            <div className="p-3.5 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/25 relative overflow-hidden">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-mono text-emerald-300 flex items-center gap-1.5">
-                  <Bot className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-mono text-[#E8EEF6] flex items-center gap-1.5">
+                  <Bot className="w-4 h-4 text-[#5E9BD9]" />
                   YOLOv8 Ingredient Recognition
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#5E9BD9]/20 text-[#5E9BD9]">
                   98.4% Confidence
                 </span>
               </div>
               <div className="flex flex-wrap gap-1.5">
-                <span className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-black/40 text-emerald-300 border border-emerald-500/30">
+                <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-mono bg-[#0B0C0A] text-[#E8EEF6] border border-[#5E9BD9]/30">
                   🍅 Tomato (x3)
                 </span>
-                <span className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-black/40 text-emerald-300 border border-emerald-500/30">
-                  🍗 Chicken (250g)
+                <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-mono bg-[#0B0C0A] text-[#E8EEF6] border border-[#5E9BD9]/30">
+                  🧄 Garlic (2 cloves)
                 </span>
-                <span className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-black/40 text-emerald-300 border border-emerald-500/30">
+                <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-mono bg-[#0B0C0A] text-[#E8EEF6] border border-[#5E9BD9]/30">
+                  🍗 Chicken Breast (250g)
+                </span>
+                <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-mono bg-[#0B0C0A] text-[#E8EEF6] border border-[#5E9BD9]/30">
                   🌿 Basil
                 </span>
               </div>
@@ -84,26 +86,26 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
             {/* Nutrition & Fitness Goal */}
             <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2.5">
-                <Flame className="w-4 h-4 text-amber-400 shrink-0" />
+              <div className="p-3 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/15 flex items-center gap-2.5">
+                <Flame className="w-4 h-4 text-[#5E9BD9] shrink-0" />
                 <div>
-                  <div className="text-white font-bold">480 kcal</div>
-                  <div className="text-[10px] text-text-muted">High Protein (38g)</div>
+                  <div className="text-[#E8EEF6] font-bold">480 kcal</div>
+                  <div className="text-[10px] text-[#7E8C9F]">High Protein (38g)</div>
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2.5">
-                <Bot className="w-4 h-4 text-cyan-400 shrink-0" />
+              <div className="p-3 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/15 flex items-center gap-2.5">
+                <Bot className="w-4 h-4 text-[#84B6E8] shrink-0" />
                 <div>
-                  <div className="text-cyan-300 font-bold">Grok AI Coach</div>
-                  <div className="text-[10px] text-text-muted">Weight Maint.</div>
+                  <div className="text-[#5E9BD9] font-bold">Grok AI Coach</div>
+                  <div className="text-[10px] text-[#7E8C9F]">Weight Maint.</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-text-muted">
+          <div className="pt-3 border-t border-[#5E9BD9]/15 flex items-center justify-between text-[11px] font-mono text-[#7E8C9F]">
             <span>Flutter • Dart • FastAPI</span>
-            <span>Roboflow Vision</span>
+            <span className="text-[#5E9BD9]">Roboflow Vision</span>
           </div>
         </div>
       );
@@ -112,17 +114,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     // 02. Zenith — Ultimate Productivity Hub
     if (project.id === "zenith") {
       return (
-        <div className="w-full h-full p-5 sm:p-7 rounded-2xl bg-[#090A0E] border border-white/10 flex flex-col justify-between overflow-hidden relative group">
-          <div className="flex items-center justify-between pb-4 border-b border-white/5">
+        <div className="w-full h-full p-5 sm:p-7 rounded-3xl bg-[#0B0C0A] border border-[#5E9BD9]/25 flex flex-col justify-between overflow-hidden relative group shadow-inner">
+          <div className="flex items-center justify-between pb-4 border-b border-[#5E9BD9]/15">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-xs font-mono text-purple-400 ml-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#5E9BD9]" />
+              <span className="text-xs font-mono text-[#5E9BD9] ml-2">
                 zenith-workspace.io
               </span>
             </div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#5E9BD9]/15 text-[#5E9BD9] border border-[#5E9BD9]/30">
               <Volume2 className="w-3 h-3" />
               Web Audio Synthesizer
             </span>
@@ -130,37 +132,40 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
           <div className="space-y-3 my-3">
             {/* Natural language parser prompt */}
-            <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs font-mono">
-              <div className="text-[10px] text-purple-300 mb-1">
+            <div className="p-3 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/25 text-xs font-mono">
+              <div className="text-[10px] text-[#5E9BD9] mb-1">
                 Natural Language Task Compiler:
               </div>
-              <div className="text-white">
+              <div className="text-[#E8EEF6]">
                 &gt; "Complete Q4 architectural review tomorrow #eng !p1"
               </div>
             </div>
 
-            {/* Pomodoro timer + Subtask checklist */}
-            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2">
-                <Clock className="w-4 h-4 text-purple-400 shrink-0" />
+            {/* Pomodoro Timer Preview */}
+            <div className="p-3.5 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/15 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Clock className="w-5 h-5 text-[#5E9BD9] animate-spin-slow" />
                 <div>
-                  <div className="text-white font-bold">25:00 Focus</div>
-                  <div className="text-[10px] text-emerald-400">Pomodoro Active</div>
+                  <div className="text-base font-bold font-mono text-[#E8EEF6]">25:00</div>
+                  <div className="text-[10px] font-mono text-[#7E8C9F]">Deep Work Session</div>
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2">
-                <CheckSquare className="w-4 h-4 text-cyan-400 shrink-0" />
-                <div>
-                  <div className="text-white font-bold">Chart.js Stats</div>
-                  <div className="text-[10px] text-text-muted">5 Visual Themes</div>
-                </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#5E9BD9] animate-pulse" />
+                <span className="text-[10px] font-mono text-[#5E9BD9]">Synthesizing Sine Tone</span>
               </div>
+            </div>
+
+            {/* Subtask checklist */}
+            <div className="flex items-center gap-2 text-xs font-mono text-[#B8C4D4] px-1">
+              <CheckSquare className="w-4 h-4 text-[#5E9BD9]" />
+              <span>Chart.js Analytics Sync: 100% Client-Side LocalStorage</span>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-text-muted">
-            <span>HTML5 • CSS3 • JavaScript</span>
-            <span>JSON Import/Export</span>
+          <div className="pt-3 border-t border-[#5E9BD9]/15 flex items-center justify-between text-[11px] font-mono text-[#7E8C9F]">
+            <span>Chart.js • Web Audio API</span>
+            <span className="text-[#5E9BD9]">Vanilla ES6+</span>
           </div>
         </div>
       );
@@ -169,63 +174,63 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     // 03. CyberMatch — Neural Memory Matrix
     if (project.id === "cybermatch") {
       return (
-        <div className="w-full h-full p-5 sm:p-7 rounded-2xl bg-[#090A0E] border border-white/10 flex flex-col justify-between overflow-hidden relative group">
-          <div className="flex items-center justify-between pb-4 border-b border-white/5">
+        <div className="w-full h-full p-5 sm:p-7 rounded-3xl bg-[#0B0C0A] border border-[#5E9BD9]/25 flex flex-col justify-between overflow-hidden relative group shadow-inner">
+          <div className="flex items-center justify-between pb-4 border-b border-[#5E9BD9]/15">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-xs font-mono text-pink-400 ml-2">
-                cybermatch-arcade.glitch
+              <span className="w-2.5 h-2.5 rounded-full bg-[#5E9BD9]" />
+              <span className="text-xs font-mono text-[#5E9BD9] ml-2">
+                cybermatch-arcade.matrix
               </span>
             </div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded-full bg-pink-500/10 text-pink-400 border border-pink-500/20">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#5E9BD9]/15 text-[#5E9BD9] border border-[#5E9BD9]/30">
               <Gamepad2 className="w-3 h-3" />
-              Neon Matrix
+              60 FPS Dynamic Engine
             </span>
           </div>
 
-          <div className="space-y-3 my-3">
-            {/* 4x4 Grid preview */}
-            <div className="p-3 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-between">
-              <div className="grid grid-cols-4 gap-1.5 text-center text-sm font-mono">
-                <span className="w-8 h-8 rounded bg-black/60 border border-pink-400/50 flex items-center justify-center">
-                  ⚡
-                </span>
-                <span className="w-8 h-8 rounded bg-black/60 border border-pink-400/50 flex items-center justify-center">
-                  👾
-                </span>
-                <span className="w-8 h-8 rounded bg-black/60 border border-cyan-400/50 flex items-center justify-center text-cyan-300">
-                  🧠
-                </span>
-                <span className="w-8 h-8 rounded bg-black/60 border border-cyan-400/50 flex items-center justify-center text-cyan-300">
-                  🧠
-                </span>
-              </div>
-              <div className="flex flex-col items-end text-xs font-mono">
-                <span className="text-pink-400 font-bold flex items-center gap-1">
-                  <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                  Combo x4
-                </span>
-                <span className="text-emerald-400 text-[11px]">+850 PTS</span>
-              </div>
+          {/* Interactive Memory Grid Mockup */}
+          <div className="my-3">
+            <div className="grid grid-cols-4 gap-2 mb-3">
+              {[
+                { emoji: "⚡", active: true },
+                { emoji: "🤖", active: true },
+                { emoji: "🧠", active: false },
+                { emoji: "🚀", active: false },
+                { emoji: "🔮", active: false },
+                { emoji: "⚡", active: true },
+                { emoji: "💎", active: false },
+                { emoji: "🤖", active: true },
+              ].map((card, i) => (
+                <div
+                  key={i}
+                  className={`h-12 rounded-xl flex items-center justify-center font-bold text-lg border transition-all ${
+                    card.active
+                      ? "bg-[#181A15] border-[#5E9BD9] shadow-[0_0_15px_rgba(94,155,217,0.3)] text-[#E8EEF6]"
+                      : "bg-[#0B0C0A] border-white/5 text-transparent"
+                  }`}
+                >
+                  {card.active ? card.emoji : "?"}
+                </div>
+              ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-              <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2">
-                <Trophy className="w-3.5 h-3.5 text-yellow-400" />
-                <span className="text-text-secondary truncate">LocalStorage Sync</span>
-              </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2">
-                <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
-                <span className="text-text-secondary truncate">Synthesized Audio</span>
-              </div>
+            <div className="flex items-center justify-between p-2 rounded-xl bg-[#181A15] border border-[#5E9BD9]/15 text-xs font-mono">
+              <span className="text-[#5E9BD9] flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5" />
+                Streak: 4x Multiplier
+              </span>
+              <span className="text-[#E8EEF6] flex items-center gap-1.5">
+                <Trophy className="w-3.5 h-3.5 text-[#5E9BD9]" />
+                Score: 2,480 pts
+              </span>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-text-muted">
-            <span>Vanilla JS • Web Audio</span>
-            <span>4 Themes & 3 Grids</span>
+          <div className="pt-3 border-t border-[#5E9BD9]/15 flex items-center justify-between text-[11px] font-mono text-[#7E8C9F]">
+            <span>Web Audio Oscillator Synth</span>
+            <span className="text-[#5E9BD9]">Procedural Sound FX</span>
           </div>
         </div>
       );
@@ -234,57 +239,58 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     // 04. Swift Institute LMS
     if (project.id === "swift-lms") {
       return (
-        <div className="w-full h-full p-5 sm:p-7 rounded-2xl bg-[#090A0E] border border-white/10 flex flex-col justify-between overflow-hidden relative group">
-          <div className="flex items-center justify-between pb-4 border-b border-white/5">
+        <div className="w-full h-full p-5 sm:p-7 rounded-3xl bg-[#0B0C0A] border border-[#5E9BD9]/25 flex flex-col justify-between overflow-hidden relative group shadow-inner">
+          <div className="flex items-center justify-between pb-4 border-b border-[#5E9BD9]/15">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-xs font-mono text-cyan-400 ml-2">
-                lms-swift.vercel.app
+              <span className="w-2.5 h-2.5 rounded-full bg-[#5E9BD9]" />
+              <span className="text-xs font-mono text-[#5E9BD9] ml-2">
+                lms.swift-institute.edu
               </span>
             </div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Live Deployment
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#5E9BD9]/15 text-[#5E9BD9] border border-[#5E9BD9]/30">
+              <ShieldCheck className="w-3 h-3" />
+              Multi-Role RBAC Active
             </span>
           </div>
 
           <div className="space-y-3 my-3">
-            <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-between">
+            {/* Live Class Indicator */}
+            <div className="p-3.5 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/25 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
-                  <Video className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-xl bg-[#5E9BD9]/20 border border-[#5E9BD9]/30 flex items-center justify-center">
+                  <Video className="w-4 h-4 text-[#5E9BD9]" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-white font-medium">
-                    Zoom Meeting SDK
-                  </div>
-                  <div className="text-[11px] font-mono text-text-muted">
-                    Attendance Tracking & Live Classes
-                  </div>
+                  <div className="text-xs font-bold text-[#E8EEF6]">Live Zoom Classroom</div>
+                  <div className="text-[10px] font-mono text-[#7E8C9F]">Web SDK Attendance Verified</div>
                 </div>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-400/10 text-cyan-400">
-                Connected
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#5E9BD9]/20 text-[#5E9BD9]">
+                In Session
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/5 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-text-secondary truncate">OTP Email Auth</span>
+            {/* Certificate Verification Simulation */}
+            <div className="p-3.5 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/15 flex items-center justify-between text-xs font-mono">
+              <div className="flex items-center gap-2.5">
+                <QrCode className="w-4 h-4 text-[#84B6E8]" />
+                <span className="text-[#B8C4D4]">Cert #SWIFT-2024-8842</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/5 flex items-center gap-2">
-                <QrCode className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span className="text-text-secondary truncate">QR Verification</span>
-              </div>
+              <span className="text-[#5E9BD9] font-bold">QR Verified</span>
+            </div>
+
+            {/* Role indicator */}
+            <div className="flex items-center gap-2 text-xs font-mono text-[#7E8C9F] px-1">
+              <Users className="w-3.5 h-3.5 text-[#5E9BD9]" />
+              <span>Dedicated Portals: Student · Instructor · Admin</span>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-text-muted">
-            <span>React • Node.js • Prisma</span>
-            <span>PostgreSQL • Nodemailer</span>
+          <div className="pt-3 border-t border-[#5E9BD9]/15 flex items-center justify-between text-[11px] font-mono text-[#7E8C9F]">
+            <span>PostgreSQL • Prisma • Node.js</span>
+            <span className="text-[#5E9BD9]">Zoom Meeting SDK</span>
           </div>
         </div>
       );
@@ -293,54 +299,60 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     // 05. NextTripy
     if (project.id === "nexttripy") {
       return (
-        <div className="w-full h-full p-5 sm:p-7 rounded-2xl bg-[#090A0E] border border-white/10 flex flex-col justify-between overflow-hidden relative group">
-          <div className="flex items-center justify-between pb-4 border-b border-white/5">
+        <div className="w-full h-full p-5 sm:p-7 rounded-3xl bg-[#0B0C0A] border border-[#5E9BD9]/25 flex flex-col justify-between overflow-hidden relative group shadow-inner">
+          <div className="flex items-center justify-between pb-4 border-b border-[#5E9BD9]/15">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-xs font-mono text-blue-400 ml-2">
-                nexttripy.com
+              <span className="w-2.5 h-2.5 rounded-full bg-[#5E9BD9]" />
+              <span className="text-xs font-mono text-[#5E9BD9] ml-2">
+                nexttripy.com (PK & KSA)
               </span>
             </div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-              Pakistan & KSA
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#5E9BD9]/15 text-[#5E9BD9] border border-[#5E9BD9]/30">
+              <Navigation className="w-3 h-3" />
+              Next.js 15 App Router
             </span>
           </div>
 
           <div className="space-y-3 my-3">
-            <div className="grid grid-cols-2 gap-2">
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2.5">
-                <Car className="w-4 h-4 text-blue-400 shrink-0" />
+            {/* Dual Market Options */}
+            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+              <div className="p-3 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/15 flex items-center gap-2.5">
+                <Car className="w-4 h-4 text-[#5E9BD9]" />
                 <div>
-                  <div className="text-xs font-mono text-white font-medium">Car Fleet</div>
-                  <div className="text-[10px] font-mono text-text-muted">Self & Chauffeur</div>
+                  <div className="text-[#E8EEF6] font-bold">Luxury Fleet</div>
+                  <div className="text-[10px] text-[#7E8C9F]">Sedan · SUV · 4x4</div>
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-2.5">
-                <Hotel className="w-4 h-4 text-cyan-400 shrink-0" />
+              <div className="p-3 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/15 flex items-center gap-2.5">
+                <Hotel className="w-4 h-4 text-[#84B6E8]" />
                 <div>
-                  <div className="text-xs font-mono text-white font-medium">Hotels</div>
-                  <div className="text-[10px] font-mono text-text-muted">Verified Suites</div>
+                  <div className="text-[#E8EEF6] font-bold">Suites & Hotels</div>
+                  <div className="text-[10px] text-[#7E8C9F]">PK & KSA Booking</div>
                 </div>
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs font-mono text-emerald-300">
-                <MessageSquare className="w-4 h-4" />
-                <span>Instant WhatsApp Inquiry</span>
+            {/* WhatsApp Integration Preview */}
+            <div className="p-3.5 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/25 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <MessageSquare className="w-4 h-4 text-[#5E9BD9]" />
+                <span className="text-xs font-mono text-[#E8EEF6]">Instant WhatsApp Booking</span>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+              <span className="text-[10px] font-mono bg-[#5E9BD9]/20 text-[#5E9BD9] px-2 py-0.5 rounded">
                 Direct Sync
               </span>
             </div>
+
+            <div className="text-xs font-mono text-[#7E8C9F] px-1">
+              Prisma + Neon Serverless PostgreSQL Backend
+            </div>
           </div>
 
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-text-muted">
-            <span>Next.js 15 • TypeScript</span>
-            <span>Neon Postgres • JWT</span>
+          <div className="pt-3 border-t border-[#5E9BD9]/15 flex items-center justify-between text-[11px] font-mono text-[#7E8C9F]">
+            <span>Next.js 15 • TypeScript • React 19</span>
+            <span className="text-[#5E9BD9]">Vercel Edge</span>
           </div>
         </div>
       );
@@ -348,61 +360,57 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
     // 06. Swift Parcel
     return (
-      <div className="w-full h-full p-5 sm:p-7 rounded-2xl bg-[#090A0E] border border-white/10 flex flex-col justify-between overflow-hidden relative group">
-        <div className="flex items-center justify-between pb-4 border-b border-white/5">
+      <div className="w-full h-full p-5 sm:p-7 rounded-3xl bg-[#0B0C0A] border border-[#5E9BD9]/25 flex flex-col justify-between overflow-hidden relative group shadow-inner">
+        <div className="flex items-center justify-between pb-4 border-b border-[#5E9BD9]/15">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-            <span className="text-xs font-mono text-cyan-400 ml-2">
-              swift-parcel.sys (MERN Stack)
+            <span className="w-2.5 h-2.5 rounded-full bg-[#5E9BD9]" />
+            <span className="text-xs font-mono text-[#5E9BD9] ml-2">
+              swift-parcel.dispatch.net
             </span>
           </div>
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#5E9BD9]/15 text-[#5E9BD9] border border-[#5E9BD9]/30">
             <Package className="w-3 h-3" />
-            Multi-Role Portals
+            MERN Operations
           </span>
         </div>
 
         <div className="space-y-3 my-3">
-          <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+          {/* Tracking Pipeline Simulation */}
+          <div className="p-3.5 rounded-2xl bg-[#181A15] border border-[#5E9BD9]/25">
             <div className="flex items-center justify-between text-xs font-mono mb-2">
-              <span className="text-text-muted">Waybill: #SP-8942-PK</span>
-              <span className="text-emerald-400">In Transit</span>
+              <span className="text-[#5E9BD9] font-bold">Tracking #SP-80419-LHE</span>
+              <span className="text-[10px] text-[#84B6E8] bg-[#5E9BD9]/15 px-2 py-0.5 rounded">
+                Out for Delivery
+              </span>
             </div>
-            <div className="relative flex items-center justify-between mt-3 text-[10px] font-mono text-text-secondary">
-              <div className="flex flex-col items-center">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 mb-1" />
-                <span>Customer</span>
-              </div>
-              <div className="h-0.5 flex-1 bg-emerald-400/40 mx-2" />
-              <div className="flex flex-col items-center">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 mb-1" />
-                <span>Admin</span>
-              </div>
-              <div className="h-0.5 flex-1 bg-white/20 mx-2" />
-              <div className="flex flex-col items-center">
-                <span className="w-2 h-2 rounded-full bg-white/30 mb-1" />
-                <span>Courier</span>
-              </div>
+            <div className="w-full bg-[#0B0C0A] h-2 rounded-full overflow-hidden border border-white/5">
+              <div className="bg-gradient-to-r from-[#5E9BD9] to-[#E8EEF6] h-full w-3/4 rounded-full" />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/5 flex items-center gap-2">
-              <Navigation className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="text-text-secondary truncate">Delivery Routing</span>
+          {/* Tri-Portal Separation */}
+          <div className="grid grid-cols-3 gap-2 text-center text-xs font-mono">
+            <div className="p-2 rounded-xl bg-[#181A15] border border-[#5E9BD9]/15 text-[#E8EEF6]">
+              Customer
             </div>
-            <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/5 flex items-center gap-2">
-              <Users className="w-3.5 h-3.5 text-blue-400" />
-              <span className="text-text-secondary truncate">Admin Support</span>
+            <div className="p-2 rounded-xl bg-[#181A15] border border-[#5E9BD9]/15 text-[#E8EEF6]">
+              Admin
             </div>
+            <div className="p-2 rounded-xl bg-[#181A15] border border-[#5E9BD9]/15 text-[#E8EEF6]">
+              Courier
+            </div>
+          </div>
+
+          <div className="text-xs font-mono text-[#7E8C9F] px-1">
+            Real-time In-App Client-Admin Messaging Channel
           </div>
         </div>
 
-        <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-text-muted">
-          <span>MongoDB • Express • React</span>
-          <span>Node.js RESTful API</span>
+        <div className="pt-3 border-t border-[#5E9BD9]/15 flex items-center justify-between text-[11px] font-mono text-[#7E8C9F]">
+          <span>MongoDB • Express • React • Node</span>
+          <span className="text-[#5E9BD9]">RESTful Pipeline</span>
         </div>
       </div>
     );
@@ -410,49 +418,48 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <div
-      className="sticky top-28 rounded-3xl glass-card border border-white/15 p-6 sm:p-10 shadow-2xl mb-12 transition-all duration-300"
       style={{
-        zIndex: index + 10,
+        top: `calc(90px + ${index * 22}px)`,
       }}
+      className="sticky mb-12 sm:mb-16 transform-gpu"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        {/* Left Side: Information */}
-        <div className="lg:col-span-7 flex flex-col justify-between">
+      <div className="p-6 sm:p-9 md:p-11 rounded-3xl glass-card border border-[#5E9BD9]/25 shadow-3d-card hover:border-[#5E9BD9]/55 transition-all duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group">
+        {/* Left Side: Metadata & Architectural Summary */}
+        <div className="lg:col-span-7 flex flex-col justify-between h-full">
           <div>
-            {/* Top row: Number & Category */}
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="text-4xl sm:text-5xl font-extrabold font-display text-white/20">
+            {/* Top row: Number & Domain badge */}
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl sm:text-4xl font-extrabold font-display text-[#5E9BD9]/40 group-hover:text-[#5E9BD9] transition-colors">
                 {project.number}
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-              <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/[0.04] border border-white/10 text-cyan-400">
-                {project.category}
+              <span className="px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider bg-[#5E9BD9]/10 text-[#5E9BD9] border border-[#5E9BD9]/25 shadow-sm">
+                {project.badge}
               </span>
-              {project.badge && (
-                <span className="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  {project.badge}
-                </span>
-              )}
+              <span className="text-xs font-mono text-[#7E8C9F] hidden sm:inline">
+                // {project.category}
+              </span>
             </div>
 
-            {/* Title & Tagline */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-white tracking-tight">
+            {/* Title */}
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-[#E8EEF6] group-hover:text-[#5E9BD9] transition-colors leading-tight">
               {project.title}
             </h3>
-            <p className="mt-1 text-sm sm:text-base font-mono text-cyan-300 font-medium">
+
+            {/* Tagline */}
+            <p className="mt-2 text-sm sm:text-base font-mono text-[#84B6E8]">
               {project.tagline}
             </p>
 
             {/* Short Description */}
-            <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base text-[#B8C4D4] leading-relaxed">
               {project.shortDescription}
             </p>
 
             {/* Highlights */}
             <div className="mt-5 space-y-2">
               {project.highlights.slice(0, 3).map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-text-secondary">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#E8EEF6]">
+                  <CheckCircle2 className="w-4 h-4 text-[#5E9BD9] shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -463,13 +470,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               {project.technologies.slice(0, 7).map((tech) => (
                 <span
                   key={tech}
-                  className="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/[0.03] border border-white/10 text-text-secondary"
+                  className="px-3 py-1 rounded-xl text-xs font-mono bg-[#181A15] border border-[#5E9BD9]/20 text-[#E8EEF6]"
                 >
                   {tech}
                 </span>
               ))}
               {project.technologies.length > 7 && (
-                <span className="px-2 py-1 rounded-lg text-xs font-mono bg-white/[0.02] text-text-muted">
+                <span className="px-3 py-1 rounded-xl text-xs font-mono bg-[#181A15] border border-white/5 text-[#7E8C9F]">
                   +{project.technologies.length - 7} more
                 </span>
               )}
@@ -477,38 +484,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-3 mt-8 pt-6 border-t border-white/10">
-            {project.liveUrl && (
-              <MagneticButton>
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-cyan-400 text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 shadow-lg shadow-cyan-400/20 transition-all"
-                >
-                  <span>Live Demo</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </MagneticButton>
-            )}
-
+          <div className="flex flex-wrap items-center gap-3 mt-8 pt-6 border-t border-[#5E9BD9]/15">
             <MagneticButton>
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.04] border border-white/15 text-white font-mono text-xs uppercase tracking-wider hover:bg-white/[0.1] hover:border-cyan-400/40 transition-all"
+                className="btn-3d-blue inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono font-bold text-xs uppercase tracking-wider"
               >
-                <Github className="w-4 h-4 text-cyan-400" />
+                <Github className="w-4 h-4 text-[#121310]" />
                 <span>Source Code</span>
               </a>
             </MagneticButton>
 
             <button
               onClick={() => onOpenDetails(project)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.03] border border-white/10 text-text-secondary hover:text-white hover:border-white/20 font-mono text-xs uppercase tracking-wider transition-all"
+              className="btn-3d-outline inline-flex items-center gap-2 px-4 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider"
             >
-              <Info className="w-4 h-4 text-text-muted" />
+              <Info className="w-4 h-4 text-[#5E9BD9]" />
               <span>Architecture Specs</span>
             </button>
           </div>
