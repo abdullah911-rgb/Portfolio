@@ -8,39 +8,37 @@ export default {
   theme: {
     extend: {
       colors: {
+        earth: {
+          void: "#060701",
+          deep: "#0B0D06",
+          charcoal: "#141413",
+          spruce: "#212D2D",
+          moss: "#363F3A",
+          olive: "#40423B",
+          sage: "#66726B",
+          stone: "#AFACA1",
+          stoneLight: "#BDBBB2",
+          gold: "#B89B6F",
+          cream: "#E2D2B8",
+          sand: "#C9C8BF",
+        },
         theme: {
-          dark: "#121310",          // Chinese Black (#121310)
-          darker: "#0B0C0A",        // Ultra Deep Shadow
-          surface: "#181A15",       // Raised Surface
-          card: "#1E201A",          // Glass Card Base
-          border: "rgba(94, 155, 217, 0.18)", // Subtle Carolina Blue border
-          borderHover: "rgba(94, 155, 217, 0.45)",
-          blue: "#5E9BD9",          // Carolina Blue (#5E9BD9)
-          blueGlow: "#4A89C8",
-          blueLight: "#84B6E8",
-          gray: "#E8EEF6",          // Bright Gray (#E8EEF6)
-          grayMuted: "#B8C4D4",     // Secondary text
-          graySubtle: "#7E8C9F",    // Tertiary muted
-        },
-        dark: {
-          primary: "#121310",
-          secondary: "#181A15",
-          card: "#1E201A",
-          elevated: "#252820",
-          border: "rgba(94, 155, 217, 0.18)",
-          borderSubtle: "rgba(232, 238, 246, 0.08)",
-        },
-        text: {
-          primary: "#E8EEF6",
-          secondary: "#B8C4D4",
-          muted: "#7E8C9F",
-        },
-        accent: {
-          cyan: "#5E9BD9",
-          blue: "#5E9BD9",
-          purple: "#7BA8DC",
-          gradientStart: "#E8EEF6",
-          gradientEnd: "#5E9BD9",
+          dark: "#0B0D06",          // Main background
+          darker: "#060701",        // Deepest void
+          surface: "#141413",       // Elevated surface
+          card: "#212D2D",          // Glass Card Base (deep spruce)
+          cardAlt: "#363F3A",       // Raised mineral card
+          border: "rgba(184, 155, 111, 0.2)", // Warm bronze border
+          borderHover: "rgba(184, 155, 111, 0.55)",
+          borderSage: "rgba(102, 114, 107, 0.28)",
+          accent: "#B89B6F",        // Warm bronze gold
+          accentGlow: "#D4AF37",
+          accentLight: "#E2D2B8",
+          sage: "#66726B",
+          cream: "#E2D2B8",
+          textPrimary: "#E2D2B8",   // Warm Silk Cream
+          textSecondary: "#BDBBB2", // Warm Stone Light
+          textMuted: "#AFACA1",     // Muted Limestone
         },
       },
       fontFamily: {
@@ -73,9 +71,10 @@ export default {
         "radial-gradient": "radial-gradient(circle at center, var(--tw-gradient-stops))",
       },
       boxShadow: {
-        "3d-card": "0 20px 50px -15px rgba(0, 0, 0, 0.7), 0 0 35px -10px rgba(94, 155, 217, 0.2)",
-        "3d-glow": "0 0 30px rgba(94, 155, 217, 0.35)",
-        "blue-button": "0 10px 25px -5px rgba(94, 155, 217, 0.45)",
+        "3d-card": "0 20px 50px -15px rgba(0, 0, 0, 0.8), 0 0 35px -10px rgba(184, 155, 111, 0.15)",
+        "3d-card-hover": "0 30px 60px -12px rgba(0, 0, 0, 0.9), 0 0 45px -5px rgba(184, 155, 111, 0.35)",
+        "3d-glow": "0 0 30px rgba(184, 155, 111, 0.35)",
+        "gold-button": "0 10px 25px -5px rgba(184, 155, 111, 0.4)",
       },
     },
   },

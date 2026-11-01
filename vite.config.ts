@@ -11,9 +11,10 @@ export default defineConfig({
           'vendor-react': ['react', 'react-dom'],
           'vendor-motion': ['framer-motion'],
           'vendor-icons': ['react-icons', 'lucide-react'],
+          'vendor-three': ['three', 'lenis'],
         },
       },
     },
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 1000,
   },
 })

@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
@@ -31,24 +31,24 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       <motion.div
         whileHover={{ scale: 1.05, translateY: -2 }}
         transition={{ type: "spring", stiffness: 400, damping: 15 }}
-        className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wider uppercase border border-[#5E9BD9]/30 bg-[#5E9BD9]/10 text-[#5E9BD9] shadow-[0_0_20px_rgba(94,155,217,0.15)] backdrop-blur-md mb-4 ${
+        className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wider uppercase border border-[#B89B6F]/30 bg-[#B89B6F]/10 text-[#E2D2B8] shadow-[0_0_20px_rgba(184,155,111,0.18)] backdrop-blur-md mb-4 ${
           isCenter ? "justify-center" : ""
         }`}
       >
-        <Sparkles className="w-3.5 h-3.5 text-[#5E9BD9] animate-pulse" />
+        <Sparkles className="w-3.5 h-3.5 text-[#B89B6F] animate-pulse" />
         <span>{badge}</span>
       </motion.div>
 
       {/* 3D Heading Typography */}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-[#E8EEF6] leading-[1.1]">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-[#E2D2B8] leading-[1.1]">
         {title}{" "}
         {highlight && (
-          <span className="text-gradient-blue inline-block">{highlight}</span>
+          <span className="text-gradient-gold inline-block">{highlight}</span>
         )}
       </h2>
 
       {description && (
-        <p className="mt-4 text-base md:text-lg text-[#B8C4D4] leading-relaxed font-normal">
+        <p className="mt-4 text-base md:text-lg text-[#BDBBB2] leading-relaxed font-normal">
           {description}
         </p>
       )}

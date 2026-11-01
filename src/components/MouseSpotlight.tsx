@@ -89,12 +89,12 @@ export const MouseSpotlight: React.FC = () => {
         blueTrails.unshift({ x: blueX, y: blueY, alpha: 0.95 });
       }
 
-      // ── 1. Draw 3D Ambient Cursor Spotlight (Carolina Blue #5E9BD9) ──
+      // ── 1. Draw 3D Ambient Cursor Spotlight (Warm Bronze + Neon Green glow) ──
       if (isVisible) {
         const glow = ctx.createRadialGradient(blueX, blueY, 0, blueX, blueY, 340);
-        glow.addColorStop(0, "rgba(94, 155, 217, 0.18)");
-        glow.addColorStop(0.35, "rgba(94, 155, 217, 0.06)");
-        glow.addColorStop(0.7, "rgba(232, 238, 246, 0.02)");
+        glow.addColorStop(0, "rgba(82, 255, 184, 0.12)");
+        glow.addColorStop(0.35, "rgba(184, 155, 111, 0.08)");
+        glow.addColorStop(0.7, "rgba(226, 210, 184, 0.02)");
         glow.addColorStop(1, "transparent");
         ctx.fillStyle = glow;
         ctx.beginPath();
@@ -102,7 +102,7 @@ export const MouseSpotlight: React.FC = () => {
         ctx.fill();
       }
 
-      // ── 2. Draw Bright Gray (#E8EEF6) Ball Disappearing Traces ──
+      // ── 2. Draw Pure White Ball Disappearing Traces ──
       for (let i = brightTrails.length - 1; i >= 0; i--) {
         const t = brightTrails[i];
         t.alpha -= 0.045; // Smooth decay
@@ -113,9 +113,9 @@ export const MouseSpotlight: React.FC = () => {
 
         ctx.save();
         ctx.globalAlpha = t.alpha;
-        ctx.shadowColor = "rgba(232, 238, 246, 0.9)";
+        ctx.shadowColor = "rgba(255, 255, 255, 0.95)";
         ctx.shadowBlur = 12;
-        ctx.fillStyle = "#E8EEF6";
+        ctx.fillStyle = "#FFFFFF";
         ctx.beginPath();
         const r = Math.max(0.5, 4.5 * t.alpha);
         ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
@@ -123,7 +123,7 @@ export const MouseSpotlight: React.FC = () => {
         ctx.restore();
       }
 
-      // ── 3. Draw Carolina Blue (#5E9BD9) Ball Disappearing Traces ──
+      // ── 3. Draw Neon Green Ball Disappearing Traces ──
       for (let i = blueTrails.length - 1; i >= 0; i--) {
         const t = blueTrails[i];
         t.alpha -= 0.035; // Slightly longer trailing decay
@@ -134,9 +134,9 @@ export const MouseSpotlight: React.FC = () => {
 
         ctx.save();
         ctx.globalAlpha = t.alpha;
-        ctx.shadowColor = "#5E9BD9";
+        ctx.shadowColor = "#52FFB8";
         ctx.shadowBlur = 18;
-        ctx.fillStyle = "#5E9BD9";
+        ctx.fillStyle = "#52FFB8";
         ctx.beginPath();
         const r = Math.max(0.5, 3.8 * t.alpha);
         ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
@@ -144,19 +144,19 @@ export const MouseSpotlight: React.FC = () => {
         ctx.restore();
       }
 
-      // ── 4. Draw Main Bright Gray Ball with Outer Pulse Ring ──
+      // ── 4. Draw Main White Ball with Outer Glass Ring ──
       if (isVisible) {
         ctx.save();
         // Inner luminous core
-        ctx.shadowColor = "rgba(232, 238, 246, 1)";
+        ctx.shadowColor = "rgba(255, 255, 255, 1)";
         ctx.shadowBlur = 22;
-        ctx.fillStyle = "#E8EEF6";
+        ctx.fillStyle = "#FFFFFF";
         ctx.beginPath();
         ctx.arc(brightX, brightY, 7.5, 0, Math.PI * 2);
         ctx.fill();
 
         // 3D Glassy Ring
-        ctx.strokeStyle = "rgba(232, 238, 246, 0.85)";
+        ctx.strokeStyle = "rgba(226, 210, 184, 0.85)";
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.arc(brightX, brightY, 14, 0, Math.PI * 2);
@@ -164,20 +164,20 @@ export const MouseSpotlight: React.FC = () => {
         ctx.restore();
       }
 
-      // ── 5. Draw Trailing Carolina Blue (#5E9BD9) Ball ──
+      // ── 5. Draw Trailing Neon Green Ball ──
       if (isVisible) {
         ctx.save();
-        ctx.shadowColor = "#5E9BD9";
+        ctx.shadowColor = "#52FFB8";
         ctx.shadowBlur = 25;
-        ctx.fillStyle = "#5E9BD9";
+        ctx.fillStyle = "#52FFB8";
         ctx.beginPath();
         ctx.arc(blueX, blueY, 5.5, 0, Math.PI * 2);
         ctx.fill();
 
         // Inner glowing core
-        ctx.fillStyle = "#A7CEF4";
+        ctx.fillStyle = "#FFFFFF";
         ctx.beginPath();
-        ctx.arc(blueX, blueY, 2.5, 0, Math.PI * 2);
+        ctx.arc(blueX, blueY, 2.2, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }

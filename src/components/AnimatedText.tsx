@@ -12,7 +12,7 @@ const Word: React.FC<AnimatedWordProps> = ({ children, progress, range }) => {
   const color = useTransform(
     progress,
     range,
-    ["rgba(165, 169, 179, 0.25)", "rgba(244, 244, 244, 1)"]
+    ["rgba(175, 172, 161, 0.25)", "rgba(226, 210, 184, 1)"]
   );
 
   return (

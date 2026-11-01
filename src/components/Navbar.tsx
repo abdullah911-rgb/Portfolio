@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, FileText, Sparkles } from "lucide-react";
 import { personalInfo } from "../data/personal";
@@ -23,7 +23,6 @@ export const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      // Section spy
       const sections = navLinks.map((link) => link.href.substring(1));
       const scrollPosition = window.scrollY + 200;
 
@@ -44,7 +43,6 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -67,9 +65,9 @@ export const Navbar: React.FC = () => {
           <motion.a
             href="#"
             whileHover={{ scale: 1.02 }}
-            className="group flex items-center gap-3.5 text-[#E8EEF6] transition-opacity"
+            className="group flex items-center gap-3.5 text-[#E2D2B8] transition-opacity"
           >
-            <div className="relative w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-[#5E9BD9] via-[#84B6E8] to-[#E8EEF6] shadow-[0_0_20px_rgba(94,155,217,0.35)] group-hover:shadow-[0_0_30px_rgba(94,155,217,0.55)] transition-all flex-shrink-0">
+            <div className="relative w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-[#B89B6F] via-[#66726B] to-[#E2D2B8] shadow-[0_0_20px_rgba(184,155,111,0.35)] group-hover:shadow-[0_0_30px_rgba(184,155,111,0.55)] transition-all flex-shrink-0">
               <img
                 src={personalInfo.avatar}
                 alt={personalInfo.name}
@@ -77,17 +75,17 @@ export const Navbar: React.FC = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-lg tracking-tight text-[#E8EEF6] flex items-center gap-2 group-hover:text-[#5E9BD9] transition-colors">
+              <span className="font-display font-bold text-lg tracking-tight text-[#E2D2B8] flex items-center gap-2 group-hover:text-[#B89B6F] transition-colors">
                 {personalInfo.name}
               </span>
-              <span className="text-[11px] font-mono text-[#5E9BD9]/90 tracking-wider">
-                Full-Stack & AI Engineer
+              <span className="text-[11px] font-mono text-[#B89B6F]/90 tracking-wider">
+                Full-Stack &amp; AI Engineer
               </span>
             </div>
           </motion.a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#181A15]/70 border border-[#5E9BD9]/20 rounded-full px-3 py-1.5 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)]">
+          <nav className="hidden lg:flex items-center gap-1 bg-[#141413]/70 border border-[#B89B6F]/20 rounded-full px-3 py-1.5 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)]">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
               return (
@@ -96,14 +94,14 @@ export const Navbar: React.FC = () => {
                   href={link.href}
                   className={`relative px-4 py-1.5 rounded-full text-xs font-mono tracking-wide uppercase transition-all duration-250 ${
                     isActive
-                      ? "text-[#E8EEF6] font-semibold"
-                      : "text-[#B8C4D4] hover:text-[#E8EEF6]"
+                      ? "text-[#E2D2B8] font-semibold"
+                      : "text-[#BDBBB2] hover:text-[#E2D2B8]"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 bg-[#5E9BD9]/20 rounded-full border border-[#5E9BD9]/40 shadow-[0_0_15px_rgba(94,155,217,0.25)]"
+                      className="absolute inset-0 bg-[#B89B6F]/20 rounded-full border border-[#B89B6F]/40 shadow-[0_0_15px_rgba(184,155,111,0.25)]"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -123,9 +121,9 @@ export const Navbar: React.FC = () => {
                 rel="noopener noreferrer"
                 className="btn-3d-outline inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider"
               >
-                <FileText className="w-3.5 h-3.5 text-[#5E9BD9]" />
+                <FileText className="w-3.5 h-3.5 text-[#B89B6F]" />
                 <span>Resume</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-[#B8C4D4]" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#BDBBB2]" />
               </a>
             </MagneticButton>
 
@@ -134,7 +132,7 @@ export const Navbar: React.FC = () => {
                 href="#contact"
                 className="btn-3d-blue inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-mono uppercase tracking-wider font-bold"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#121310]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#060701]" />
                 <span>Let's Talk</span>
               </a>
             </MagneticButton>
@@ -143,7 +141,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-[#181A15] border border-[#5E9BD9]/20 text-[#E8EEF6] hover:text-[#5E9BD9] transition-colors"
+            className="lg:hidden p-2 rounded-xl bg-[#141413] border border-[#B89B6F]/20 text-[#E2D2B8] hover:text-[#B89B6F] transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -158,7 +156,7 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-[#121310]/95 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-28 pb-10 px-6"
+            className="fixed inset-0 z-40 bg-[#0B0D06]/95 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-28 pb-10 px-6"
           >
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -166,7 +164,7 @@ export const Navbar: React.FC = () => {
               transition={{ delay: 0.1 }}
               className="flex flex-col gap-4"
             >
-              <p className="text-xs font-mono uppercase text-[#5E9BD9] tracking-widest mb-2">
+              <p className="text-xs font-mono uppercase text-[#B89B6F] tracking-widest mb-2">
                 Navigation
               </p>
               {navLinks.map((link, idx) => (
@@ -177,10 +175,10 @@ export const Navbar: React.FC = () => {
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.1 + idx * 0.05 }}
-                  className="text-2xl font-display font-bold text-[#E8EEF6] hover:text-[#5E9BD9] transition-colors flex items-center justify-between border-b border-[#5E9BD9]/10 pb-3"
+                  className="text-2xl font-display font-bold text-[#E2D2B8] hover:text-[#B89B6F] transition-colors flex items-center justify-between border-b border-[#B89B6F]/10 pb-3"
                 >
                   <span>{link.name}</span>
-                  <span className="text-xs font-mono text-[#7E8C9F]">0{idx + 1}</span>
+                  <span className="text-xs font-mono text-[#AFACA1]">0{idx + 1}</span>
                 </motion.a>
               ))}
             </motion.div>
@@ -189,7 +187,7 @@ export const Navbar: React.FC = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col gap-3 pt-6 border-t border-[#5E9BD9]/15"
+              className="flex flex-col gap-3 pt-6 border-t border-[#B89B6F]/15"
             >
               <a
                 href="/assets/resume.pdf"
@@ -197,9 +195,9 @@ export const Navbar: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-xl border border-[#5E9BD9]/30 bg-[#181A15] text-[#E8EEF6] text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl border border-[#B89B6F]/30 bg-[#141413] text-[#E2D2B8] text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
               >
-                <FileText className="w-4 h-4 text-[#5E9BD9]" />
+                <FileText className="w-4 h-4 text-[#B89B6F]" />
                 <span>Download Resume (PDF)</span>
               </a>
 
@@ -208,7 +206,7 @@ export const Navbar: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="btn-3d-blue w-full py-3.5 rounded-xl text-center font-mono font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4 text-[#121310]" />
+                <Sparkles className="w-4 h-4 text-[#060701]" />
                 <span>Let's Build Together</span>
               </a>
             </motion.div>

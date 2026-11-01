@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import Lenis from "lenis";
 import { MouseSpotlight } from "./components/MouseSpotlight";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
@@ -13,9 +15,32 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
 export function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+    });
+
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#121310] text-[#E8EEF6] relative selection:bg-[#5E9BD9]/30 selection:text-[#E8EEF6]">
-      {/* Ambient mouse follower */}
+    <div className="min-h-screen bg-[#0B0D06] text-[#E2D2B8] relative selection:bg-[#B89B6F]/30 selection:text-[#E2D2B8]">
+      {/* Ambient mouse follower with disappearing traces */}
       <MouseSpotlight />
 
       {/* Main Navbar */}

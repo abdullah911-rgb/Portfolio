@@ -8,10 +8,10 @@ import { projects } from "../data/projects";
 import type { Project } from "../data/projects";
 
 const filterTabs = [
-  { id: "all", label: "All Projects", count: 6, icon: <Sparkles className="w-3.5 h-3.5 text-[#5E9BD9]" /> },
-  { id: "fullstack", label: "Full-Stack Platforms", count: 3, icon: <Layers className="w-3.5 h-3.5 text-[#84B6E8]" /> },
-  { id: "ai", label: "AI & Computer Vision", count: 1, icon: <Bot className="w-3.5 h-3.5 text-[#5E9BD9]" /> },
-  { id: "interactive", label: "Productivity & Interactive", count: 2, icon: <Layout className="w-3.5 h-3.5 text-[#84B6E8]" /> },
+  { id: "all", label: "All Projects", count: 6, icon: <Sparkles className="w-3.5 h-3.5 text-[#B89B6F]" /> },
+  { id: "fullstack", label: "Full-Stack Platforms", count: 3, icon: <Layers className="w-3.5 h-3.5 text-[#66726B]" /> },
+  { id: "ai", label: "AI & Computer Vision", count: 1, icon: <Bot className="w-3.5 h-3.5 text-[#B89B6F]" /> },
+  { id: "interactive", label: "Productivity & Interactive", count: 2, icon: <Layout className="w-3.5 h-3.5 text-[#66726B]" /> },
 ];
 
 export const Projects: React.FC = () => {
@@ -33,9 +33,9 @@ export const Projects: React.FC = () => {
   });
 
   return (
-    <section id="projects" className="py-24 md:py-36 relative overflow-hidden bg-[#181A15]/40">
+    <section id="projects" className="py-24 md:py-36 relative overflow-hidden bg-[#141413]/40">
       {/* 3D Dynamic Ambient Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#5E9BD9]/8 blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#B89B6F]/8 blur-[160px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
@@ -55,14 +55,14 @@ export const Projects: React.FC = () => {
               onClick={() => setSelectedFilter(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
                 selectedFilter === tab.id
-                  ? "btn-3d-blue font-bold shadow-blue-button"
-                  : "bg-[#181A15] text-[#B8C4D4] border border-[#5E9BD9]/20 hover:text-[#E8EEF6] hover:border-[#5E9BD9]/40"
+                  ? "btn-3d-blue font-bold shadow-gold-button"
+                  : "bg-[#141413] text-[#BDBBB2] border border-[#B89B6F]/20 hover:text-[#E2D2B8] hover:border-[#B89B6F]/40"
               }`}
             >
               <span>{tab.icon}</span>
               <span>{tab.label}</span>
               <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                selectedFilter === tab.id ? "bg-[#121310]/20 text-[#121310]" : "bg-white/10 text-[#7E8C9F]"
+                selectedFilter === tab.id ? "bg-[#0B0D06]/20 text-[#0B0D06]" : "bg-white/10 text-[#AFACA1]"
               }`}>
                 {tab.count}
               </span>
