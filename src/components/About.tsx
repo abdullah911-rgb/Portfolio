@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   GraduationCap,
@@ -12,6 +12,7 @@ import {
 import { SectionHeading } from "./SectionHeading";
 import { AnimatedScrollText } from "./AnimatedText";
 import { personalInfo } from "../data/personal";
+import { TiltCard } from "./TiltCard";
 
 const corePillars = [
   {
@@ -128,43 +129,44 @@ export const About: React.FC = () => {
           {/* Pillars Cards & Terminal Widget */}
           <div className="lg:col-span-5 flex flex-col gap-5">
             {corePillars.map((pillar, idx) => (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, x: 25 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ translateY: -3, scale: 1.01 }}
-                className="p-6 rounded-3xl glass-card border border-[#B89B6F]/18 hover:border-[#B89B6F]/50 transition-all group"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-2xl bg-[#B89B6F]/10 border border-[#B89B6F]/25 group-hover:scale-105 group-hover:bg-[#B89B6F]/20 transition-all shrink-0">
-                    {pillar.icon}
+              <TiltCard key={pillar.title} maxTilt={8} scale={1.02} className="border border-[#B89B6F]/18 hover:border-[#B89B6F]/50 shadow-3d-card">
+                <motion.div
+                  initial={{ opacity: 0, x: 25 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="p-6 rounded-3xl glass-card transition-all group"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-2xl bg-[#B89B6F]/10 border border-[#B89B6F]/25 group-hover:scale-105 group-hover:bg-[#B89B6F]/20 transition-all shrink-0">
+                      {pillar.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-base font-display font-bold text-[#E2D2B8] group-hover:text-[#B89B6F] transition-colors">
+                        {pillar.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-[#BDBBB2] leading-relaxed">
+                        {pillar.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-base font-display font-bold text-[#E2D2B8] group-hover:text-[#B89B6F] transition-colors">
-                      {pillar.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-[#BDBBB2] leading-relaxed">
-                      {pillar.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </TiltCard>
             ))}
 
             {/* Decorative developer snapshot with 3D Depth */}
-            <div className="p-6 rounded-3xl bg-[#060701]/95 border border-[#B89B6F]/20 font-mono text-xs shadow-inner">
-              <div className="flex items-center justify-between text-[#AFACA1] pb-3 border-b border-white/5 mb-3">
-                <span className="flex items-center gap-2 text-[#B89B6F]">
-                  <FileCode className="w-4 h-4" />
-                  abdullah.config.json
-                </span>
-                <span className="text-[10px] bg-[#B89B6F]/15 text-[#B89B6F] px-2 py-0.5 rounded">
-                  verified
-                </span>
-              </div>
-              <pre className="text-[#BDBBB2] leading-relaxed overflow-x-auto text-[11px]">
+            <TiltCard maxTilt={6} className="border border-[#B89B6F]/20 shadow-inner">
+              <div className="p-6 rounded-3xl bg-[#060701]/95 font-mono text-xs">
+                <div className="flex items-center justify-between text-[#AFACA1] pb-3 border-b border-white/5 mb-3">
+                  <span className="flex items-center gap-2 text-[#B89B6F]">
+                    <FileCode className="w-4 h-4" />
+                    abdullah.config.json
+                  </span>
+                  <span className="text-[10px] bg-[#B89B6F]/15 text-[#B89B6F] px-2 py-0.5 rounded">
+                    verified
+                  </span>
+                </div>
+                <pre className="text-[#BDBBB2] leading-relaxed overflow-x-auto text-[11px]">
 {`{
   "engineer": "${personalInfo.name}",
   "academicDegree": "BSCS (Univ of Education)",
@@ -172,8 +174,9 @@ export const About: React.FC = () => {
   "cleanCodeStandard": true,
   "clientLocation": "Worldwide Remote"
 }`}
-              </pre>
-            </div>
+                </pre>
+              </div>
+            </TiltCard>
           </div>
         </div>
       </div>

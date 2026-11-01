@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { services } from "../data/services";
+import { TiltCard } from "./TiltCard";
 
 const serviceIcons: Record<string, React.ReactNode> = {
   Layout: <Layout className="w-6 h-6 text-[#B89B6F]" />,
@@ -37,15 +38,14 @@ export const Services: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, idx) => (
-            <motion.div
-              key={service.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              whileHover={{ translateY: -6, scale: 1.01 }}
-              className="p-7 sm:p-8 rounded-3xl glass-card border border-[#B89B6F]/20 hover:border-[#B89B6F]/55 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden shadow-3d-card"
-            >
+            <TiltCard key={service.number} maxTilt={8} scale={1.02} className="border border-[#B89B6F]/20 hover:border-[#B89B6F]/55 shadow-3d-card">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="p-7 sm:p-8 rounded-3xl glass-card transition-all duration-300 flex flex-col justify-between h-full group relative overflow-hidden"
+              >
               {/* Subtle hover gradient background */}
               <div className="absolute -right-20 -top-20 w-44 h-44 bg-[#B89B6F]/15 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -91,6 +91,7 @@ export const Services: React.FC = () => {
                 ))}
               </div>
             </motion.div>
+          </TiltCard>
           ))}
         </div>
       </div>

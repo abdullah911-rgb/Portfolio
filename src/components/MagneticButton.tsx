@@ -48,6 +48,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 220, damping: 15, mass: 0.1 }}
       className={`inline-block ${className}`}
+      onClick={onClick}
     >
       {children}
     </motion.div>
@@ -60,7 +61,6 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
         target={target}
         rel={rel}
         download={download}
-        onClick={onClick}
         className="inline-block"
       >
         {content}
@@ -68,9 +68,5 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     );
   }
 
-  return (
-    <div onClick={onClick} className="inline-block cursor-pointer">
-      {content}
-    </div>
-  );
+  return content;
 };

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { educationData } from "../data/education";
+import { TiltCard } from "./TiltCard";
 
 export const Education: React.FC = () => {
   return (
@@ -30,15 +31,14 @@ export const Education: React.FC = () => {
             const isDegree = item.type === "degree";
 
             return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-                whileHover={{ translateY: -5 }}
-                className="p-7 sm:p-9 rounded-3xl glass-card border border-[#B89B6F]/20 hover:border-[#B89B6F]/55 transition-all duration-300 flex flex-col justify-between shadow-3d-card"
-              >
+              <TiltCard key={item.title} maxTilt={6} scale={1.01} className="border border-[#B89B6F]/20 hover:border-[#B89B6F]/55 shadow-3d-card">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.15 }}
+                  className="p-7 sm:p-9 rounded-3xl glass-card transition-all duration-300 flex flex-col justify-between h-full"
+                >
                 <div>
                   {/* Top Badge & Icon */}
                   <div className="flex items-center justify-between pb-6 border-b border-[#B89B6F]/15 mb-6">
@@ -102,6 +102,7 @@ export const Education: React.FC = () => {
                   ))}
                 </div>
               </motion.div>
+            </TiltCard>
             );
           })}
         </div>

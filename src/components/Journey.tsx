@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { experiences } from "../data/experience";
+import { TiltCard } from "./TiltCard";
 
 const roleIcons: Record<string, React.ReactNode> = {
   "sky-bridge": <Truck className="w-5 h-5 text-[#B89B6F]" />,
@@ -119,63 +120,68 @@ export const Journey: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  whileHover={{ translateY: -4 }}
-                  className="relative p-7 sm:p-9 rounded-3xl glass-card border border-[#B89B6F]/20 shadow-3d-card group"
+                  className="relative group"
                 >
                   {/* Floating Glowing Node Marker */}
-                  <div className="absolute -left-[35px] sm:-left-[51px] top-8 w-5 h-5 rounded-full bg-[#0B0D06] border-2 border-[#B89B6F] shadow-[0_0_15px_#B89B6F] flex items-center justify-center">
+                  <div className="absolute -left-[35px] sm:-left-[51px] top-8 w-5 h-5 rounded-full bg-[#0B0D06] border-2 border-[#B89B6F] shadow-[0_0_15px_#B89B6F] flex items-center justify-center z-10">
                     <div className="w-2 h-2 rounded-full bg-[#E2D2B8] animate-pulse" />
                   </div>
 
-                  {/* Header Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#B89B6F]/15 mb-6">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-2xl bg-[#B89B6F]/10 border border-[#B89B6F]/25 group-hover:scale-105 group-hover:bg-[#B89B6F]/20 transition-all shrink-0">
-                        {roleIcons[exp.id] || <Laptop className="w-5 h-5 text-[#B89B6F]" />}
+                  <TiltCard
+                    maxTilt={5}
+                    glare={true}
+                    className="p-7 sm:p-9 rounded-3xl glass-card border border-[#B89B6F]/20 shadow-3d-card"
+                  >
+                    {/* Header Row */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#B89B6F]/15 mb-6">
+                      <div className="flex items-center gap-4">
+                        <div className="p-3 rounded-2xl bg-[#B89B6F]/10 border border-[#B89B6F]/25 group-hover:scale-105 group-hover:bg-[#B89B6F]/20 transition-all shrink-0">
+                          {roleIcons[exp.id] || <Laptop className="w-5 h-5 text-[#B89B6F]" />}
+                        </div>
+                        <div>
+                          <h3 className="text-xl sm:text-2xl font-display font-bold text-[#E2D2B8] group-hover:text-[#B89B6F] transition-colors">
+                            {exp.role}
+                          </h3>
+                          <p className="text-sm font-mono text-[#B89B6F] font-medium mt-0.5">
+                            {exp.company}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-display font-bold text-[#E2D2B8] group-hover:text-[#B89B6F] transition-colors">
-                          {exp.role}
-                        </h3>
-                        <p className="text-sm font-mono text-[#B89B6F] font-medium mt-0.5">
-                          {exp.company}
-                        </p>
+
+                      <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#BDBBB2]">
+                        <span className="flex items-center gap-1.5 bg-[#141413] px-3 py-1.5 rounded-full border border-[#B89B6F]/20">
+                          <Calendar className="w-3.5 h-3.5 text-[#B89B6F]" />
+                          {exp.period}
+                        </span>
+                        <span className="flex items-center gap-1.5 bg-[#141413] px-3 py-1.5 rounded-full border border-[#B89B6F]/20">
+                          <MapPin className="w-3.5 h-3.5 text-[#66726B]" />
+                          {exp.location}
+                        </span>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#BDBBB2]">
-                      <span className="flex items-center gap-1.5 bg-[#141413] px-3 py-1.5 rounded-full border border-[#B89B6F]/20">
-                        <Calendar className="w-3.5 h-3.5 text-[#B89B6F]" />
-                        {exp.period}
-                      </span>
-                      <span className="flex items-center gap-1.5 bg-[#141413] px-3 py-1.5 rounded-full border border-[#B89B6F]/20">
-                        <MapPin className="w-3.5 h-3.5 text-[#66726B]" />
-                        {exp.location}
-                      </span>
+                    {/* Narrative Description Points */}
+                    <div className="space-y-3 mb-7">
+                      {exp.description.map((paragraph, pIdx) => (
+                        <div key={pIdx} className="flex items-start gap-3 text-xs sm:text-sm text-[#BDBBB2] leading-relaxed">
+                          <CheckCircle2 className="w-4 h-4 text-[#B89B6F] shrink-0 mt-0.5" />
+                          <span>{paragraph}</span>
+                        </div>
+                      ))}
                     </div>
-                  </div>
 
-                  {/* Narrative Description Points */}
-                  <div className="space-y-3 mb-7">
-                    {exp.description.map((paragraph, pIdx) => (
-                      <div key={pIdx} className="flex items-start gap-3 text-xs sm:text-sm text-[#BDBBB2] leading-relaxed">
-                        <CheckCircle2 className="w-4 h-4 text-[#B89B6F] shrink-0 mt-0.5" />
-                        <span>{paragraph}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Technologies / Skills Tags */}
-                  <div className="flex flex-wrap gap-2 pt-6 border-t border-[#B89B6F]/15">
-                    {exp.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 rounded-xl text-xs font-mono bg-[#141413] border border-[#B89B6F]/20 text-[#E2D2B8] hover:border-[#B89B6F]/50 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                    {/* Technologies / Skills Tags */}
+                    <div className="flex flex-wrap gap-2 pt-6 border-t border-[#B89B6F]/15">
+                      {exp.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 rounded-xl text-xs font-mono bg-[#141413] border border-[#B89B6F]/20 text-[#E2D2B8] hover:border-[#B89B6F]/50 transition-colors"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </TiltCard>
                 </motion.div>
               ))}
             </motion.div>

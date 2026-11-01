@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { personalInfo } from "../data/personal";
 import { SectionHeading } from "./SectionHeading";
+import { TiltCard } from "./TiltCard";
 
 const RESUME_PDF = "/assets/resume.pdf";
 
@@ -95,11 +96,12 @@ export const Resume: React.FC = () => {
               </div>
             ) : (
               /* ── 3D Preview Card ── */
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="glass-card rounded-3xl p-0 overflow-hidden border border-[#B89B6F]/25 shadow-3d-card"
-              >
+              <TiltCard maxTilt={5} scale={1.01} className="border border-[#B89B6F]/25 shadow-3d-card">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="glass-card rounded-3xl p-0 overflow-hidden"
+                >
                 {/* Document Header Strip */}
                 <div className="bg-gradient-to-r from-[#B89B6F]/25 via-[#66726B]/10 to-transparent border-b border-[#B89B6F]/15 px-8 py-6 flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl p-[2px] bg-gradient-to-tr from-[#B89B6F] to-[#E2D2B8] shrink-0 overflow-hidden shadow-[0_0_20px_rgba(184,155,111,0.35)]">
@@ -189,6 +191,7 @@ export const Resume: React.FC = () => {
                   </div>
                 </div>
               </motion.div>
+            </TiltCard>
             )}
           </motion.div>
 
@@ -201,83 +204,89 @@ export const Resume: React.FC = () => {
             className="flex flex-col gap-5 lg:sticky lg:top-28"
           >
             {/* Primary Download CTA */}
-            <div className="glass-card rounded-3xl p-6 border border-[#B89B6F]/25 hover:border-[#B89B6F]/50 transition-all group shadow-3d-card">
-              <div className="flex items-start gap-4 mb-5">
-                <div className="w-11 h-11 rounded-2xl bg-[#B89B6F]/15 border border-[#B89B6F]/30 flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(184,155,111,0.25)] group-hover:scale-105 transition-transform">
-                  <Download className="w-5 h-5 text-[#B89B6F]" />
+            <TiltCard maxTilt={8} scale={1.02} className="border border-[#B89B6F]/25 shadow-3d-card hover:border-[#B89B6F]/50">
+              <div className="glass-card rounded-3xl p-6 group">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-11 h-11 rounded-2xl bg-[#B89B6F]/15 border border-[#B89B6F]/30 flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(184,155,111,0.25)] group-hover:scale-105 transition-transform">
+                    <Download className="w-5 h-5 text-[#B89B6F]" />
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-[#E2D2B8] text-base">
+                      Download Resume
+                    </h4>
+                    <p className="text-xs text-[#AFACA1] mt-0.5 font-mono">
+                      PDF · Always up-to-date
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-display font-bold text-[#E2D2B8] text-base">
-                    Download Resume
-                  </h4>
-                  <p className="text-xs text-[#AFACA1] mt-0.5 font-mono">
-                    PDF · Always up-to-date
-                  </p>
-                </div>
+                <a
+                  href={RESUME_PDF}
+                  download="Muhammad_Abdullah_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-3d-blue w-full py-3.5 rounded-2xl font-mono font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+                >
+                  <Download className="w-4 h-4 text-[#0B0D06]" />
+                  Download PDF
+                </a>
               </div>
-              <a
-                href={RESUME_PDF}
-                download="Muhammad_Abdullah_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-3d-blue w-full py-3.5 rounded-2xl font-mono font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2"
-              >
-                <Download className="w-4 h-4 text-[#0B0D06]" />
-                Download PDF
-              </a>
-            </div>
+            </TiltCard>
 
             {/* View in Browser */}
-            <div className="glass-card rounded-3xl p-6 border border-[#B89B6F]/20 hover:border-[#B89B6F]/40 transition-all group shadow-3d-card">
-              <div className="flex items-start gap-4 mb-5">
-                <div className="w-11 h-11 rounded-2xl bg-[#141413] border border-[#B89B6F]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Eye className="w-5 h-5 text-[#B89B6F]" />
+            <TiltCard maxTilt={8} scale={1.02} className="border border-[#B89B6F]/20 shadow-3d-card hover:border-[#B89B6F]/40">
+              <div className="glass-card rounded-3xl p-6 group">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-11 h-11 rounded-2xl bg-[#141413] border border-[#B89B6F]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <Eye className="w-5 h-5 text-[#B89B6F]" />
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-[#E2D2B8] text-base">
+                      View in Browser
+                    </h4>
+                    <p className="text-xs text-[#AFACA1] mt-0.5 font-mono">
+                      Opens PDF in a new tab
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-display font-bold text-[#E2D2B8] text-base">
-                    View in Browser
-                  </h4>
-                  <p className="text-xs text-[#AFACA1] mt-0.5 font-mono">
-                    Opens PDF in a new tab
-                  </p>
-                </div>
+                <a
+                  href={RESUME_PDF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-3d-outline w-full py-3 rounded-2xl text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+                >
+                  <ExternalLink className="w-4 h-4 text-[#B89B6F]" />
+                  Open PDF
+                </a>
               </div>
-              <a
-                href={RESUME_PDF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-3d-outline w-full py-3 rounded-2xl text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
-              >
-                <ExternalLink className="w-4 h-4 text-[#B89B6F]" />
-                Open PDF
-              </a>
-            </div>
+            </TiltCard>
 
             {/* GitHub CTA */}
-            <div className="glass-card rounded-3xl p-6 border border-[#B89B6F]/20 hover:border-[#B89B6F]/40 transition-all group shadow-3d-card">
-              <div className="flex items-start gap-4 mb-5">
-                <div className="w-11 h-11 rounded-2xl bg-[#141413] border border-[#B89B6F]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Github className="w-5 h-5 text-[#E2D2B8]" />
+            <TiltCard maxTilt={8} scale={1.02} className="border border-[#B89B6F]/20 shadow-3d-card hover:border-[#B89B6F]/40">
+              <div className="glass-card rounded-3xl p-6 group">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-11 h-11 rounded-2xl bg-[#141413] border border-[#B89B6F]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                    <Github className="w-5 h-5 text-[#E2D2B8]" />
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-[#E2D2B8] text-base">
+                      GitHub Profile
+                    </h4>
+                    <p className="text-xs text-[#AFACA1] mt-0.5 font-mono">
+                      See my code &amp; open-source work
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-display font-bold text-[#E2D2B8] text-base">
-                    GitHub Profile
-                  </h4>
-                  <p className="text-xs text-[#AFACA1] mt-0.5 font-mono">
-                    See my code & open-source work
-                  </p>
-                </div>
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-3d-outline w-full py-3 rounded-2xl text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+                >
+                  <Github className="w-4 h-4 text-[#B89B6F]" />
+                  @abdullah911-rgb
+                </a>
               </div>
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-3d-outline w-full py-3 rounded-2xl text-center font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2"
-              >
-                <Github className="w-4 h-4 text-[#B89B6F]" />
-                @abdullah911-rgb
-              </a>
-            </div>
+            </TiltCard>
 
           </motion.div>
         </div>

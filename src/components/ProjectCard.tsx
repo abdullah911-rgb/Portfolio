@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import type { Project } from "../data/projects";
 import { MagneticButton } from "./MagneticButton";
+import { TiltCard } from "./TiltCard";
 
 interface ProjectCardProps {
   project: Project;
@@ -423,9 +424,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       }}
       className="sticky mb-12 sm:mb-16 transform-gpu"
     >
-      <div className="p-6 sm:p-9 md:p-11 rounded-3xl glass-card border border-[#B89B6F]/25 shadow-3d-card hover:border-[#B89B6F]/55 transition-all duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group">
-        {/* Left Side: Metadata & Architectural Summary */}
-        <div className="lg:col-span-7 flex flex-col justify-between h-full">
+      <TiltCard maxTilt={5} scale={1.01} className="border border-[#B89B6F]/25 shadow-3d-card hover:border-[#B89B6F]/55 transition-all duration-500">
+        <div className="p-6 sm:p-9 md:p-11 rounded-3xl glass-card grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group">
+          {/* Left Side: Metadata & Architectural Summary */}
+          <div className="lg:col-span-7 flex flex-col justify-between h-full">
           <div>
             {/* Top row: Number & Domain badge */}
             <div className="flex items-center gap-3 mb-4">
@@ -511,7 +513,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="lg:col-span-5 h-72 sm:h-80 md:h-96">
           {renderVisual()}
         </div>
-      </div>
+        </div>
+      </TiltCard>
     </div>
   );
 };

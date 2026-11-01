@@ -63,6 +63,7 @@ import {
 } from "react-icons/si";
 import { SectionHeading } from "./SectionHeading";
 import { techCategories } from "../data/technologies";
+import { TiltCard } from "./TiltCard";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   "web-dev": <Code2 className="w-4 h-4 text-[#B89B6F]" />,
@@ -206,52 +207,52 @@ export const TechStack: React.FC = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {categoriesToDisplay.map((cat, idx) => (
-              <motion.div
-                key={cat.id}
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                whileHover={{ translateY: -5 }}
-                className="p-7 rounded-3xl glass-card border border-[#B89B6F]/20 flex flex-col justify-between group shadow-3d-card"
-              >
-                <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-[#B89B6F]/15 mb-4">
-                    <div className="flex items-center gap-2.5">
-                      <div className="p-2.5 rounded-xl bg-[#B89B6F]/10 border border-[#B89B6F]/25 group-hover:scale-105 transition-transform">
-                        {categoryIcons[cat.id]}
+              <TiltCard key={cat.id} maxTilt={8} scale={1.02} className="border border-[#B89B6F]/20 shadow-3d-card">
+                <motion.div
+                  initial={{ opacity: 0, y: 25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  className="p-7 rounded-3xl glass-card flex flex-col justify-between h-full group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between pb-4 border-b border-[#B89B6F]/15 mb-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="p-2.5 rounded-xl bg-[#B89B6F]/10 border border-[#B89B6F]/25 group-hover:scale-105 transition-transform">
+                          {categoryIcons[cat.id]}
+                        </div>
+                        <h3 className="font-display font-bold text-base text-[#E2D2B8] group-hover:text-[#B89B6F] transition-colors">
+                          {cat.name}
+                        </h3>
                       </div>
-                      <h3 className="font-display font-bold text-base text-[#E2D2B8] group-hover:text-[#B89B6F] transition-colors">
-                        {cat.name}
-                      </h3>
+                      <span className="text-xs font-mono text-[#B89B6F] bg-[#B89B6F]/10 px-2 py-0.5 rounded-full border border-[#B89B6F]/20">
+                        {cat.skills.length}
+                      </span>
                     </div>
-                    <span className="text-xs font-mono text-[#B89B6F] bg-[#B89B6F]/10 px-2 py-0.5 rounded-full border border-[#B89B6F]/20">
-                      {cat.skills.length}
-                    </span>
-                  </div>
 
-                  <p className="text-xs text-[#BDBBB2] mb-5 leading-relaxed">
-                    {cat.description}
-                  </p>
+                    <p className="text-xs text-[#BDBBB2] mb-5 leading-relaxed">
+                      {cat.description}
+                    </p>
 
-                  {/* Skills Pills */}
-                  <div className="flex flex-wrap gap-2">
-                    {cat.skills.map((skill) => (
-                      <motion.div
-                        key={skill.name}
-                        whileHover={{ scale: 1.05, translateY: -2 }}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 cursor-default ${
-                          skill.highlight
-                            ? "bg-[#212D2D] text-[#E2D2B8] border border-[#B89B6F]/40 shadow-[0_0_12px_rgba(184,155,111,0.15)] hover:border-[#B89B6F] hover:text-[#B89B6F]"
-                            : "bg-[#141413]/80 text-[#BDBBB2] border border-white/5 hover:border-[#B89B6F]/30 hover:text-[#E2D2B8]"
-                        }`}
-                      >
-                        <span className="shrink-0">{renderIcon(skill.iconName)}</span>
-                        <span>{skill.name}</span>
-                      </motion.div>
-                    ))}
+                    {/* Skills Pills */}
+                    <div className="flex flex-wrap gap-2">
+                      {cat.skills.map((skill) => (
+                        <motion.div
+                          key={skill.name}
+                          whileHover={{ scale: 1.05, translateY: -2 }}
+                          className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 cursor-default ${
+                            skill.highlight
+                              ? "bg-[#212D2D] text-[#E2D2B8] border border-[#B89B6F]/40 shadow-[0_0_12px_rgba(184,155,111,0.15)] hover:border-[#B89B6F] hover:text-[#B89B6F]"
+                              : "bg-[#141413]/80 text-[#BDBBB2] border border-white/5 hover:border-[#B89B6F]/30 hover:text-[#E2D2B8]"
+                          }`}
+                        >
+                          <span className="shrink-0">{renderIcon(skill.iconName)}</span>
+                          <span>{skill.name}</span>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </TiltCard>
             ))}
           </motion.div>
         </AnimatePresence>
